@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class MainControlLogic : MonoBehaviour
+public class GameControl : MonoBehaviour
 {
     [SerializeField]
     Text _highScoreText;
@@ -29,14 +30,19 @@ public class MainControlLogic : MonoBehaviour
 
     public void MainScreen()
     {
-        _playerTransform.position = new Vector3(0, _playerTransform.position.y, _playerTransform.position.z);
-        Time.timeScale = 0;
+        //_playerTransform.position = new Vector3(0, _playerTransform.position.y, _playerTransform.position.z);
+        //Time.timeScale = 0;
     }
 
     public void StartGame()
     {        
-        _playerTransform.position = new Vector3(0, _playerTransform.position.y, _playerTransform.position.z);
-        Time.timeScale = 1;
+        //_playerTransform.position = new Vector3(0, _playerTransform.position.y, _playerTransform.position.z);
+        //Time.timeScale = 1;
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void ExitGame()

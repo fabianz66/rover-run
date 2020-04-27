@@ -28,17 +28,26 @@ public class PlayerSpeed : MonoBehaviour
     //Records the time at which the game started
     private float _gameStartTimeS = 0.0f;
 
+    //This flags determines wether the car moves or not
+    private bool _playerMoving = false;
+
+    //Initial delay to start moving according to the music
+    private float _initialDelayS = 2f;
+
     void Start()
     {
         _rigidBody = this.GetComponent<Rigidbody2D>();        
         _currentMaxVelocity = _initialMaxVelocity;
-        _gameStartTimeS = Time.time;        
+        _gameStartTimeS = Time.time + _initialDelayS;
+        this.GetComponent<Animator>().enabled = false;
+        Invoke("StartMoving", _initialDelayS);//Initial delay to start moving and animating
     }
 
     void Update()
     {
         //How many time we should have increased _currentMaxVelocity so far
-        float intervals = Mathf.Floor((Time.time - _gameStartTimeS) / _speedIncreaseIntervalS);
+        float elapsedTimeS = (Time.time - _gameStartTimeS);
+        float intervals = Mathf.Floor(elapsedTimeS / _speedIncreaseIntervalS);
 
         //Increase _currentMaxVelocity
         _currentMaxVelocity = _initialMaxVelocity + intervals * _speedIncrease;
@@ -47,10 +56,18 @@ public class PlayerSpeed : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Wait for a little bit
+        if (_playerMoving == false) return;
+
         // Add force to player if he hasn't reached _currentMaxVelocity
         if (_rigidBody.velocity.x < _currentMaxVelocity)
         {
             _rigidBody.AddForce(Vector2.right * _acceleration);
         }
+    }
+
+    void StartMoving() {
+        _playerMoving = true;
+        this.GetComponent<Animator>().enabled = true;
     }
 }
