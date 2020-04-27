@@ -28,23 +28,11 @@ public class PlayerSpeed : MonoBehaviour
     //Records the time at which the game started
     private float _gameStartTimeS = 0.0f;
 
-    //Clip to play at start
-    public AudioClip _engineStartClip;
-
-    //Clip to play when car is moving
-    public AudioClip _engineLoopClip;
-
-    //Audio Source to Play Sounds
-    private AudioSource _audioSource;
-
     void Start()
     {
-        _rigidBody = this.GetComponent<Rigidbody2D>();
-        _audioSource = this.GetComponent<AudioSource>();
-        _audioSource.loop = true;
+        _rigidBody = this.GetComponent<Rigidbody2D>();        
         _currentMaxVelocity = _initialMaxVelocity;
-        _gameStartTimeS = Time.time;
-        StartCoroutine(playEngineSound());
+        _gameStartTimeS = Time.time;        
     }
 
     void Update()
@@ -64,14 +52,5 @@ public class PlayerSpeed : MonoBehaviour
         {
             _rigidBody.AddForce(Vector2.right * _acceleration);
         }
-    }
-
-    IEnumerator playEngineSound()
-    {
-        _audioSource.clip = _engineStartClip;
-        _audioSource.Play();
-        yield return new WaitForSeconds(_audioSource.clip.length);
-        _audioSource.clip = _engineLoopClip;
-        _audioSource.Play();
     }
 }

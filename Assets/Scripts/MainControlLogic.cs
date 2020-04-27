@@ -44,6 +44,11 @@ public class MainControlLogic : MonoBehaviour
         Application.Quit();
     }
 
+    public void OpenFbImpreza()
+    {
+        Application.OpenURL("https://www.facebook.com/RepuestosLandRoverImpreza");
+    }
+
     public void PauseResumeGame()
     {
         if (Time.timeScale == 0)
