@@ -18,18 +18,22 @@ public class PlayerControl : MonoBehaviour
     public Transform _bottomLanePosition;
 
     //Flags that indicate which direction we should move
-    private bool _moveUp;
-    private bool _moveDown;
+    private bool MoveUp;
+    private bool MoveDown;
 
     //Swipe start position
-    private Vector2 _swipeStartPos;
+    private Vector2 SwipeStartPos;
 
     //Swipe start time
-    private float _swipeStartTime;
+    private float SwipeStartTime;
+
+    //Boolean that indicates if the car is at top position
+    public bool IsAtTopLane;
 
     public void Start()
     {
-        transform.position = new Vector3(transform.position.x, _bottomLanePosition.position.y + 1.5f, transform.position.z);        
+        transform.position = new Vector3(transform.position.x, _bottomLanePosition.position.y + 1.5f, transform.position.z);
+        IsAtTopLane = false;
     }
 
     void Update()
@@ -40,14 +44,16 @@ public class PlayerControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_moveUp) {
+        if (MoveUp) {
             transform.position = new Vector3(transform.position.x, _topLanePosition.position.y + 1.5f, transform.position.z);
-            _moveUp = false;
+            MoveUp = false;
+            IsAtTopLane = true;
         }
 
-        if (_moveDown) {
+        if (MoveDown) {
             transform.position = new Vector3(transform.position.x, _bottomLanePosition.position.y + 1.5f, transform.position.z);
-            _moveDown = false;
+            MoveDown = false;
+            IsAtTopLane = false;
         }
     } 
 
@@ -55,12 +61,12 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            _moveDown = true;
+            MoveDown = true;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            _moveUp = true;
+            MoveUp = true;
         }
     }
 
@@ -71,17 +77,17 @@ public class PlayerControl : MonoBehaviour
             Touch t = Input.GetTouch(0);
             if (t.phase == TouchPhase.Began)
             {
-                _swipeStartPos = new Vector2(t.position.x / (float)Screen.width, t.position.y / (float)Screen.width);
-                _swipeStartTime = Time.time;
+                SwipeStartPos = new Vector2(t.position.x / (float)Screen.width, t.position.y / (float)Screen.width);
+                SwipeStartTime = Time.time;
             }
             if (t.phase == TouchPhase.Ended)
             {
-                if (Time.time - _swipeStartTime > MAX_SWIPE_TIME) // press too long
+                if (Time.time - SwipeStartTime > MAX_SWIPE_TIME) // press too long
                     return;
 
                 Vector2 endPos = new Vector2(t.position.x / (float)Screen.width, t.position.y / (float)Screen.width);
 
-                Vector2 swipe = new Vector2(endPos.x - _swipeStartPos.x, endPos.y - _swipeStartPos.y);
+                Vector2 swipe = new Vector2(endPos.x - SwipeStartPos.x, endPos.y - SwipeStartPos.y);
 
                 if (swipe.magnitude < MIN_SWIPE_DISTANCE) // Too short swipe
                     return;
@@ -90,11 +96,11 @@ public class PlayerControl : MonoBehaviour
                 { 
                     if (swipe.y > 0) // Vertical swipe
                     {
-                        _moveUp = true;
+                        MoveUp = true;
                     }
                     else
                     {
-                        _moveDown = true;
+                        MoveDown = true;
                     }
                 }
             }

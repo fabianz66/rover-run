@@ -15,29 +15,56 @@ public class GameControl : MonoBehaviour
     float _currentScore;
 
     [SerializeField]
-    Transform _playerTransform;
+    public Transform obstaclesSpawnGuide;
+
+    //Car obstacles
+    [SerializeField]
+    public GameObject carPrefab;
+    private Queue<GameObject> ReusableCars = new Queue<GameObject>();
+
+    //This timer includes time since start
+    private float timerS = 0.0f;
+
+    //Player information
+    [SerializeField]
+    public GameObject player;
+    private Rigidbody2D playerRigidBody;
+    private Transform playerTransform;
+    private PlayerControl playerControl;
+    private PlayerSpeed playerSpeed;
+    private float playerWidthPoints;
+
+    // Interval in seconds of when to spawn a new car
+    private const float initialCarIntervalS = 6.0f;
+    private float currentCarIntervalS = 0.0f;
+    private float minCarIntervalS = 1.0f;
+    private float timeOfLastCarS = 0.0f;
 
     private void Start()
     {
+        // Get all player information
+        playerRigidBody = player.GetComponent<Rigidbody2D>();
+        playerTransform = player.GetComponent<Transform>();
+        playerControl = player.GetComponent<PlayerControl>();
+        playerSpeed = player.GetComponent<PlayerSpeed>();
+        playerWidthPoints = player.GetComponent<SpriteRenderer>().bounds.size.x;
+        currentCarIntervalS = initialCarIntervalS;
+        //minCarIntervalS = (playerWidthPoints * 3.0f) / (playerSpeed.finalMaxVelocity); // How many seconds must pass at current speed to to move playerWidth distance
     }
 
     void Update()
     {
-        _currentScore = Mathf.Floor(_playerTransform.position.x);
+        timerS += Time.deltaTime;
+        _currentScore = Mathf.Floor(playerTransform.position.x);
         _currentScore = Mathf.Max(0, _currentScore);
         _currentScoreText.text = "Score: " + _currentScore;
+        currentCarIntervalS = initialCarIntervalS - 0.5f * (_currentScore / 100.0f);
+        currentCarIntervalS = Mathf.Max(currentCarIntervalS, minCarIntervalS);
     }
 
-    public void MainScreen()
+    private void FixedUpdate()
     {
-        //_playerTransform.position = new Vector3(0, _playerTransform.position.y, _playerTransform.position.z);
-        //Time.timeScale = 0;
-    }
-
-    public void StartGame()
-    {        
-        //_playerTransform.position = new Vector3(0, _playerTransform.position.y, _playerTransform.position.z);
-        //Time.timeScale = 1;
+        AddCar();
     }
 
     public void MainMenu()
@@ -65,5 +92,38 @@ public class GameControl : MonoBehaviour
         {
             Time.timeScale = 0;
         }
+    }
+
+    private void AddCar()
+    {
+        //Don't do anything at the beginning
+        if (playerRigidBody.velocity.x < 1.0f) return;
+
+        float secondsSinceLastObstacle = timerS - timeOfLastCarS;
+        if (secondsSinceLastObstacle >= currentCarIntervalS)
+        {
+            AddObstacle(carPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z);
+            timeOfLastCarS = timerS;
+        }
+    }
+
+    private void AddObstacle(GameObject prefab, Queue<GameObject> reusableQueue, float x, float y, float z)
+    {
+        GameObject c;
+        if (reusableQueue.Count == 0)
+        {
+            c = Instantiate(prefab);
+        }
+        else
+        {
+            c = reusableQueue.Dequeue();
+        }
+        c.GetComponent<ReusableObstacle>()._reusableQueue = reusableQueue;
+        Rigidbody2D rb = c.GetComponent<Rigidbody2D>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = 0.0f;
+        rb.rotation = 0.0f;
+        float prefabWidth = c.GetComponent<SpriteRenderer>().bounds.size.x; //Points
+        rb.position = new Vector3(x, y, z);
     }
 }
