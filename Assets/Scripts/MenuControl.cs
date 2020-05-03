@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
+    private void Start()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     public void ExitGame()
     {
         Application.Quit();

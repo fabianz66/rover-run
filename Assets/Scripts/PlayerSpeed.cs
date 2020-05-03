@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerSpeed : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject gameController;
+
     //Player rigid body
     private Rigidbody2D rigidBody;
 
@@ -69,5 +72,15 @@ public class PlayerSpeed : MonoBehaviour
     void StartMoving() {
         playerMoving = true;
         this.GetComponent<Animator>().enabled = true;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("COLLUSION: " + collision.gameObject.name);
+        if (collision.gameObject.name == "Car")
+        {
+            Debug.Log("GAME OVER");
+            gameController.GetComponent<GameControl>().GameOver();
+        }
     }
 }

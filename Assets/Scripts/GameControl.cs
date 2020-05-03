@@ -15,6 +15,9 @@ public class GameControl : MonoBehaviour
     float _currentScore;
 
     [SerializeField]
+    Text mainText;
+
+    [SerializeField]
     public Transform obstaclesSpawnGuide;
 
     //Car obstacles
@@ -30,20 +33,28 @@ public class GameControl : MonoBehaviour
     public GameObject player;
     private Rigidbody2D playerRigidBody;
     private Transform playerTransform;
+    private AudioSource playerAudio;
     private PlayerControl playerControl;
     private PlayerSpeed playerSpeed;
     private float playerWidthPoints;
 
-    // Interval in seconds of when to spawn a new car
+    //Interval in seconds of when to spawn a new car
     private const float initialCarIntervalS = 6.0f;
     private float currentCarIntervalS = 0.0f;
     private float minCarIntervalS = 1.0f;
     private float timeOfLastCarS = 0.0f;
 
+    // If the user lost
+    private bool gameOver = false;
+
     private void Start()
     {
+        //Initial UI
+        mainText.enabled = false;
+
         // Get all player information
         playerRigidBody = player.GetComponent<Rigidbody2D>();
+        playerAudio = player.GetComponent<AudioSource>();
         playerTransform = player.GetComponent<Transform>();
         playerControl = player.GetComponent<PlayerControl>();
         playerSpeed = player.GetComponent<PlayerSpeed>();
@@ -57,7 +68,7 @@ public class GameControl : MonoBehaviour
         timerS += Time.deltaTime;
         _currentScore = Mathf.Floor(playerTransform.position.x);
         _currentScore = Mathf.Max(0, _currentScore);
-        _currentScoreText.text = "Score: " + _currentScore;
+        _currentScoreText.text = "DISTANCIA: " + _currentScore;
         currentCarIntervalS = initialCarIntervalS - 0.5f * (_currentScore / 100.0f);
         currentCarIntervalS = Mathf.Max(currentCarIntervalS, minCarIntervalS);
     }
@@ -84,14 +95,31 @@ public class GameControl : MonoBehaviour
 
     public void PauseResumeGame()
     {
+        if (gameOver) return;
+
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
+            mainText.enabled = false;
+            playerAudio.UnPause();
         }
         else
         {
             Time.timeScale = 0;
+            mainText.text = "PAUSA";            
+            mainText.enabled = true;
+            playerAudio.Pause();
         }
+    }
+
+    public void GameOver()
+    {
+        mainText.text = "FIN DEL VIAJE\nDISTANCIA: " + _currentScore;
+        mainText.enabled = true;
+        gameOver = true;
+        playerAudio.Stop();
+        GetComponent<AudioSource>().Play();
+        Time.timeScale = 0;
     }
 
     private void AddCar()
@@ -118,6 +146,7 @@ public class GameControl : MonoBehaviour
         {
             c = reusableQueue.Dequeue();
         }
+        c.name = "Car";
         c.GetComponent<ReusableObstacle>()._reusableQueue = reusableQueue;
         Rigidbody2D rb = c.GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
