@@ -8,17 +8,30 @@ public class GameControl : MonoBehaviour
 {
     [SerializeField]
     Text _highScoreText;
-    float _highScore;
 
     [SerializeField]
     Text _currentScoreText;
-    float _currentScore;
+    int _currentScore;
 
     [SerializeField]
     Text mainText;
 
     [SerializeField]
     public Transform obstaclesSpawnGuide;
+
+    [SerializeField]
+    public Button MuteUnmuteButton;
+    [SerializeField]
+    public Sprite MutedSprite;
+    [SerializeField]
+    public Sprite UnmutedSprite;
+
+    [SerializeField]
+    public Button PauseResumeButton;
+    [SerializeField]
+    public Sprite PausedSprite;
+    [SerializeField]
+    public Sprite ResumedSprite;
 
     //Car obstacles
     [SerializeField]
@@ -28,6 +41,10 @@ public class GameControl : MonoBehaviour
     //This timer includes time since start
     private float timerS = 0.0f;
 
+    //Camera
+    //public GameObject camera;
+    //private AudioSource cameraAudio;
+
     //Player information
     [SerializeField]
     public GameObject player;
@@ -36,12 +53,11 @@ public class GameControl : MonoBehaviour
     private AudioSource playerAudio;
     private PlayerControl playerControl;
     private PlayerSpeed playerSpeed;
-    private float playerWidthPoints;
 
     //Interval in seconds of when to spawn a new car
     private const float initialCarIntervalS = 6.0f;
-    private float currentCarIntervalS = 0.0f;
-    private float minCarIntervalS = 1.0f;
+    private const float minCarIntervalS = 1.1f;
+    private float currentCarIntervalS = 0.0f;    
     private float timeOfLastCarS = 0.0f;
 
     // If the user lost
@@ -51,6 +67,11 @@ public class GameControl : MonoBehaviour
     {
         //Initial UI
         mainText.enabled = false;
+        if (AudioListener.volume == 0) {
+            MuteUnmuteButton.image.sprite = MutedSprite;
+        } else {
+            MuteUnmuteButton.image.sprite = UnmutedSprite;
+        }
 
         // Get all player information
         playerRigidBody = player.GetComponent<Rigidbody2D>();
@@ -58,15 +79,20 @@ public class GameControl : MonoBehaviour
         playerTransform = player.GetComponent<Transform>();
         playerControl = player.GetComponent<PlayerControl>();
         playerSpeed = player.GetComponent<PlayerSpeed>();
-        playerWidthPoints = player.GetComponent<SpriteRenderer>().bounds.size.x;
         currentCarIntervalS = initialCarIntervalS;
-        //minCarIntervalS = (playerWidthPoints * 3.0f) / (playerSpeed.finalMaxVelocity); // How many seconds must pass at current speed to to move playerWidth distance
+
+        // Show high score
+        UpdateHighScore();
+
+        //Resume time
+        Time.timeScale = 1.0f;
     }
 
     void Update()
     {
         timerS += Time.deltaTime;
-        _currentScore = Mathf.Floor(playerTransform.position.x);
+        //_currentScore = Mathf.Floor(playerTransform.position.x);
+        _currentScore = (int)playerTransform.position.x;
         _currentScore = Mathf.Max(0, _currentScore);
         _currentScoreText.text = "DISTANCIA: " + _currentScore;
         currentCarIntervalS = initialCarIntervalS - 0.5f * (_currentScore / 100.0f);
@@ -102,13 +128,29 @@ public class GameControl : MonoBehaviour
             Time.timeScale = 1;
             mainText.enabled = false;
             playerAudio.UnPause();
+            PauseResumeButton.image.sprite = ResumedSprite;
         }
         else
         {
             Time.timeScale = 0;
             mainText.text = "PAUSA";            
             mainText.enabled = true;
+            PauseResumeButton.image.sprite = PausedSprite;
             playerAudio.Pause();
+        }
+    }
+
+    public void MuteUnmute()
+    {        
+        if (AudioListener.volume == 0)
+        {
+            AudioListener.volume = 1;
+            MuteUnmuteButton.image.sprite = UnmutedSprite;
+        }
+        else
+        {
+            AudioListener.volume = 0;
+            MuteUnmuteButton.image.sprite = MutedSprite;
         }
     }
 
@@ -118,8 +160,26 @@ public class GameControl : MonoBehaviour
         mainText.enabled = true;
         gameOver = true;
         playerAudio.Stop();
-        GetComponent<AudioSource>().Play();
-        Time.timeScale = 0;
+        Camera.main.GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().Play();        
+        UpdateHighScore(); // Show high score
+        Time.timeScale = 0.0f;
+    }
+
+    public void UpdateHighScore()
+    {
+        int highScore = PlayerPrefs.GetInt("high_score");
+        if (_currentScore > highScore)
+        {
+            PlayerPrefs.SetInt("high_score", _currentScore);
+            PlayerPrefs.Save();
+        }
+        _highScoreText.text = "DISTANCIA MAXIMA: " + highScore;
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("GameScene");
     }
 
     private void AddCar()
