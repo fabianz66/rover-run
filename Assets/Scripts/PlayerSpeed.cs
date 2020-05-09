@@ -17,7 +17,7 @@ public class PlayerSpeed : MonoBehaviour
     private float initialMaxVelocity = 8.0f;
 
     //Final max velocity X
-    public float finalMaxVelocity = 15.0f;
+    public float finalMaxVelocity = 14.0f;
 
     //Current max velocity X
     private float currentMaxVelocity = 0.0f;
@@ -26,7 +26,7 @@ public class PlayerSpeed : MonoBehaviour
     private float speedIncrease = 1.0f;
 
     //How often is _currentMaxVelocity inscreased in seconds
-    private float speedIncreaseIntervalS = 10.0f;
+    private float speedIncreaseIntervalS = 8.0f;
 
     //Records the time at which the game started
     private float gameStartTimeS = 0.0f;
@@ -67,6 +67,8 @@ public class PlayerSpeed : MonoBehaviour
         {
             rigidBody.AddForce(Vector2.right * acceleration);
         }
+
+        Debug.Log("Rotation Z: " + rigidBody.transform.rotation.z);
     }
 
     void StartMoving() {
@@ -76,10 +78,8 @@ public class PlayerSpeed : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("COLLUSION: " + collision.gameObject.name);
-        if (collision.gameObject.name == "Car")
+        if (collision.gameObject.name == "Car" || Mathf.Abs(rigidBody.transform.rotation.z) > 0.9f)
         {
-            Debug.Log("GAME OVER");
             gameController.GetComponent<GameControl>().GameOver();
         }
     }

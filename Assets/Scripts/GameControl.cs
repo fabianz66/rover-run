@@ -17,6 +17,9 @@ public class GameControl : MonoBehaviour
     Text mainText;
 
     [SerializeField]
+    Text secondaryText;
+
+    [SerializeField]
     public Transform obstaclesSpawnGuide;
 
     [SerializeField]
@@ -36,6 +39,8 @@ public class GameControl : MonoBehaviour
     //Car obstacles
     [SerializeField]
     public GameObject carPrefab;
+    public GameObject conePrefab;
+    public GameObject rockPrefab;
     private Queue<GameObject> ReusableCars = new Queue<GameObject>();
 
     //This timer includes time since start
@@ -56,7 +61,7 @@ public class GameControl : MonoBehaviour
 
     //Interval in seconds of when to spawn a new car
     private const float initialCarIntervalS = 6.0f;
-    private const float minCarIntervalS = 1.1f;
+    private const float minCarIntervalS = 1.25f;
     private float currentCarIntervalS = 0.0f;    
     private float timeOfLastCarS = 0.0f;
 
@@ -67,6 +72,7 @@ public class GameControl : MonoBehaviour
     {
         //Initial UI
         mainText.enabled = false;
+        secondaryText.enabled = false;
         if (AudioListener.volume == 0) {
             MuteUnmuteButton.image.sprite = MutedSprite;
         } else {
@@ -86,6 +92,9 @@ public class GameControl : MonoBehaviour
 
         //Resume time
         Time.timeScale = 1.0f;
+
+        // Show message
+        StartCoroutine(ShowSecondaryText("Bombeelo!", 2.0f));
     }
 
     void Update()
@@ -97,11 +106,23 @@ public class GameControl : MonoBehaviour
         _currentScoreText.text = "DISTANCIA: " + _currentScore;
         currentCarIntervalS = initialCarIntervalS - 0.5f * (_currentScore / 100.0f);
         currentCarIntervalS = Mathf.Max(currentCarIntervalS, minCarIntervalS);
+
+
+        //if (timerS > 10.0f && timerS < 20.0f) {
+        //    mainText.text = "Ya va a 100... a 100do presa!";
+        //    mainText.enabled = true;
+        //} else {
+        //    mainText.enabled = false;
+        //}
     }
 
     private void FixedUpdate()
     {
         AddCar();
+        AddCone();
+        if (_currentScore == 100) {
+            StartCoroutine(ShowSecondaryText("Ya va a 100... a100do presa!", 0f));
+        }
     }
 
     public void MainMenu()
@@ -158,6 +179,7 @@ public class GameControl : MonoBehaviour
     {
         mainText.text = "FIN DEL VIAJE\nDISTANCIA: " + _currentScore;
         mainText.enabled = true;
+        secondaryText.enabled = false;
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().Stop();
@@ -177,6 +199,15 @@ public class GameControl : MonoBehaviour
         _highScoreText.text = "DISTANCIA MAXIMA: " + highScore;
     }
 
+    IEnumerator ShowSecondaryText(string text, float delay, float duration = 5.0f)
+    {
+        yield return new WaitForSeconds(delay);
+        secondaryText.text = text;
+        secondaryText.enabled = true;
+        yield return new WaitForSeconds(duration);
+        secondaryText.enabled = false;
+    }
+
     public void RestartGame()
     {
         SceneManager.LoadScene("GameScene");
@@ -187,15 +218,32 @@ public class GameControl : MonoBehaviour
         //Don't do anything at the beginning
         if (playerRigidBody.velocity.x < 1.0f) return;
 
-        float secondsSinceLastObstacle = timerS - timeOfLastCarS;
-        if (secondsSinceLastObstacle >= currentCarIntervalS)
+        float secondsSinceLastCar = timerS - timeOfLastCarS;
+        if (secondsSinceLastCar >= currentCarIntervalS)
         {
-            AddObstacle(carPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z);
+            int rand = Random.Range(0, 3);
+            if (rand == 0)
+            {
+                AddObstacle(carPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Car");
+            }
+            else if (rand == 1)
+            {
+                AddObstacle(conePrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Cone");
+            }
+            else {
+                AddObstacle(rockPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Rock");
+            }            
             timeOfLastCarS = timerS;
         }
     }
 
-    private void AddObstacle(GameObject prefab, Queue<GameObject> reusableQueue, float x, float y, float z)
+    private void AddCone()
+    {
+        //Don't do anything at the beginning
+        if (playerRigidBody.velocity.x < 1.0f) return;
+    }
+
+    private void AddObstacle(GameObject prefab, Queue<GameObject> reusableQueue, float x, float y, float z, string name)
     {
         GameObject c;
         if (reusableQueue.Count == 0)
@@ -206,7 +254,7 @@ public class GameControl : MonoBehaviour
         {
             c = reusableQueue.Dequeue();
         }
-        c.name = "Car";
+        c.name = name;
         c.GetComponent<ReusableObstacle>()._reusableQueue = reusableQueue;
         Rigidbody2D rb = c.GetComponent<Rigidbody2D>();
         rb.velocity = Vector3.zero;
