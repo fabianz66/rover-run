@@ -106,14 +106,6 @@ public class GameControl : MonoBehaviour
         _currentScoreText.text = "DISTANCIA: " + _currentScore;
         currentCarIntervalS = initialCarIntervalS - 0.5f * (_currentScore / 100.0f);
         currentCarIntervalS = Mathf.Max(currentCarIntervalS, minCarIntervalS);
-
-
-        //if (timerS > 10.0f && timerS < 20.0f) {
-        //    mainText.text = "Ya va a 100... a 100do presa!";
-        //    mainText.enabled = true;
-        //} else {
-        //    mainText.enabled = false;
-        //}
     }
 
     private void FixedUpdate()
@@ -184,6 +176,19 @@ public class GameControl : MonoBehaviour
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().Play();        
+        UpdateHighScore(); // Show high score
+        Time.timeScale = 0.0f;
+    }
+
+    public void GameCompleted()
+    {
+        mainText.text = "JUEGO COMPLETADO\nDISTANCIA: " + _currentScore;
+        mainText.enabled = true;
+        secondaryText.enabled = false;
+        gameOver = true;
+        playerAudio.Stop();
+        Camera.main.GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().Play();
         UpdateHighScore(); // Show high score
         Time.timeScale = 0.0f;
     }

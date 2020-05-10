@@ -6,7 +6,7 @@ public class BgObjectMovement : MonoBehaviour
 {
     private float cameraStartPos, objectStartPos;
     private GameObject mainCamera;
-    public float parallaxEffect = 0.7f;
+    private readonly float parallaxEffect = 0.7f;
 
     void Start()
     {
@@ -15,7 +15,6 @@ public class BgObjectMovement : MonoBehaviour
         objectStartPos = transform.position.x;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float dist = (mainCamera.transform.position.x - cameraStartPos) * parallaxEffect;

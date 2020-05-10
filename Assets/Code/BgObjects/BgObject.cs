@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BgObject
 {
-    public enum TYPE { ROAD_SIGN_GREEN, BILLBOARD, IMAGE };
+    public enum TYPE { ROAD_SIGN_GREEN, BILLBOARD, IMAGE, FINISH_LINE };
     public readonly TYPE Type;
     public string Text { get; }
     public Sprite Sprite { get; }

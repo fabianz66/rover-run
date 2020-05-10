@@ -982,6 +982,8 @@ MonoBehaviour:
     type: 3}
   roadSignGreenPrefab: {fileID: 1518566058122577852, guid: 5cc9e0f46b9a244f6b6efb3b10a2b555,
     type: 3}
+  finishLinePrefab: {fileID: 7662129925141450189, guid: 91df7aa629e684988885ef8559d7a2fa,
+    type: 3}
   playerTransform: {fileID: 1378545902}
   spawnPosition: {fileID: 1872370680}
   parentTransform: {fileID: 1515185654}

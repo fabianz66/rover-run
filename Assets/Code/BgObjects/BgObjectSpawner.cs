@@ -7,9 +7,14 @@ public class BgObjectSpawner : MonoBehaviour
     public GameObject billboardPrefab;
     public GameObject locationPrefab;
     public GameObject roadSignGreenPrefab;
+    public GameObject finishLinePrefab;
     public Transform playerTransform;
     public Transform spawnPosition;
-    public Transform parentTransform; //Which GameObject to use as parent to add the prefabs
+
+    //Which GameObject to use as parent to add the prefabs
+    public Transform parentTransform;
+
+    //All groups
     private readonly List<BgObjectGroup> groups = new List<BgObjectGroup>();
 
     #region All images to use in the background
@@ -48,10 +53,18 @@ public class BgObjectSpawner : MonoBehaviour
     void CreateAreas()
     {
         int position = 0;
-        int length = 50;
+        int length = 50;        
+        BgObjectGroup group = null;
+
+        //IMPREZA
+        group = new BgObjectGroup("IMPREZA LTDA", position, length);
+        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "IMPREZA", null);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.impreza1);
+        group.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
+        groups.Add(group);
+        position += length;
 
         //ALAJUELA
-        BgObjectGroup group = null;
         group = new BgObjectGroup("ALAJUELA", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "ALAJUELA", null);
         group.AddBgObject(BgObject.TYPE.BILLBOARD, "TE AMO OSI", null);
@@ -136,6 +149,10 @@ public class BgObjectSpawner : MonoBehaviour
             case BgObject.TYPE.IMAGE:
                 go = Instantiate(locationPrefab, parentTransform);
                 go.GetComponent<BgObjectImage>().SetSprite(bo.Sprite);
+                break;
+            case BgObject.TYPE.FINISH_LINE:
+                go = Instantiate(finishLinePrefab, parentTransform);
+                go.name = "FinishLine"; // Check PlayerSpeed script.
                 break;
         }
 

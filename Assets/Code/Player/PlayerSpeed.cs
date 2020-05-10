@@ -81,4 +81,12 @@ public class PlayerSpeed : MonoBehaviour
             gameController.GetComponent<GameControl>().GameOver();
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "FinishLine")
+        {
+            gameController.GetComponent<GameControl>().GameCompleted();
+        }
+    }
 }
