@@ -224,7 +224,7 @@ RectTransform:
   - {fileID: 1279348818}
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.231}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -816,6 +816,7 @@ GameObject:
   - component: {fileID: 178507843}
   - component: {fileID: 178507845}
   - component: {fileID: 178507844}
+  - component: {fileID: 178507846}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -963,6 +964,43 @@ MonoBehaviour:
   rockPrefab: {fileID: 476205999652916354, guid: 178dc4229bb5e44b685c1c625585f3d0,
     type: 3}
   player: {fileID: 1378545899}
+--- !u!114 &178507846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178507842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb40711a270ae4cdfa2b85c7b960cf1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  billboardPrefab: {fileID: 1277741938966354359, guid: 475625bfb38e54d02b7b1054100cb722,
+    type: 3}
+  locationPrefab: {fileID: 6810178278163245554, guid: 1c7458241bbe5431abfbbd311a74d536,
+    type: 3}
+  roadSignGreenPrefab: {fileID: 1518566058122577852, guid: 5cc9e0f46b9a244f6b6efb3b10a2b555,
+    type: 3}
+  playerTransform: {fileID: 1378545902}
+  spawnPosition: {fileID: 1872370680}
+  parentTransform: {fileID: 1515185654}
+  impreza1: {fileID: 21300000, guid: c238cbec7dc1140c9800a0bae0dadc2b, type: 3}
+  impreza2: {fileID: 21300000, guid: e44b806cec6294373aa1c2ea95b34ef1, type: 3}
+  alajuela1: {fileID: 0}
+  alajuela2: {fileID: 0}
+  sanJose1: {fileID: 0}
+  sanJose2: {fileID: 0}
+  heredia1: {fileID: 0}
+  heredia2: {fileID: 0}
+  puntarenas1: {fileID: 0}
+  puntarenas2: {fileID: 0}
+  guanacaste1: {fileID: 0}
+  guanacaste2: {fileID: 0}
+  limon1: {fileID: 0}
+  limon2: {fileID: 0}
+  cartago1: {fileID: 0}
+  cartago2: {fileID: 0}
 --- !u!1 &257953209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1225,7 @@ GameObject:
   - component: {fileID: 519420029}
   - component: {fileID: 519420033}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1914,7 +1952,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064490696}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5, y: -2, z: -10}
+  m_LocalPosition: {x: -5, y: -2.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
@@ -3708,7 +3746,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872370679}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.61, y: -1.72, z: 10}
+  m_LocalPosition: {x: 11.58, y: 0.007, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 519420032}
