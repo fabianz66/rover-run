@@ -65,6 +65,9 @@ public class GameControl : MonoBehaviour
     private float currentCarIntervalS = 0.0f;    
     private float timeOfLastCarS = 0.0f;
 
+    //Class in charge of adding elements to the background
+    private BgObjectSpawner bgObjectSpawner;
+
     // If the user lost
     private bool gameOver = false;
 
@@ -77,7 +80,7 @@ public class GameControl : MonoBehaviour
             MuteUnmuteButton.image.sprite = MutedSprite;
         } else {
             MuteUnmuteButton.image.sprite = UnmutedSprite;
-        }
+        }        
 
         // Get all player information
         playerRigidBody = player.GetComponent<Rigidbody2D>();
@@ -86,6 +89,9 @@ public class GameControl : MonoBehaviour
         playerControl = player.GetComponent<PlayerControl>();
         playerSpeed = player.GetComponent<PlayerSpeed>();
         currentCarIntervalS = initialCarIntervalS;
+
+        //Get class that adds elements to the background
+        bgObjectSpawner = GetComponent<BgObjectSpawner>();
 
         // Show high score
         UpdateHighScore();
@@ -100,10 +106,8 @@ public class GameControl : MonoBehaviour
     void Update()
     {
         timerS += Time.deltaTime;
-        //_currentScore = Mathf.Floor(playerTransform.position.x);
         _currentScore = (int)playerTransform.position.x;
         _currentScore = Mathf.Max(0, _currentScore);
-        _currentScoreText.text = "DISTANCIA: " + _currentScore;
         currentCarIntervalS = initialCarIntervalS - 0.5f * (_currentScore / 100.0f);
         currentCarIntervalS = Mathf.Max(currentCarIntervalS, minCarIntervalS);
     }
@@ -115,6 +119,16 @@ public class GameControl : MonoBehaviour
         if (_currentScore == 100) {
             StartCoroutine(ShowSecondaryText("Ya va a 100... a100do presa!", 0f));
         }
+
+        BgObjectGroup bog = bgObjectSpawner.GetBgObjectGroup(playerTransform.position.x);
+        if (bog == null) return;
+
+        _currentScoreText.text = "ESTAS EN " + bog.name;
+
+        bog = bgObjectSpawner.GetNextBgObjectGroup(playerTransform.position.x);
+        if (bog == null) return;
+
+        _highScoreText.text = "LLEGANDO A " + bog.name + " EN " + (int)(bog.startPositionX - player.transform.position.x);
     }
 
     public void MainMenu()

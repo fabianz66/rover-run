@@ -6,7 +6,7 @@ public class BgObjectMovement : MonoBehaviour
 {
     private float cameraStartPos, objectStartPos;
     private GameObject mainCamera;
-    private readonly float parallaxEffect = 0.7f;
+    private readonly float parallaxEffect = 0.8f;
 
     void Start()
     {

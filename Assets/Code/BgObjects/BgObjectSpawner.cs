@@ -24,24 +24,31 @@ public class BgObjectSpawner : MonoBehaviour
 
     public Sprite alajuela1;
     public Sprite alajuela2;
+    public Sprite alajuela3;
 
     public Sprite sanJose1;
     public Sprite sanJose2;
+    public Sprite sanJose3;
 
     public Sprite heredia1;
     public Sprite heredia2;
+    public Sprite heredia3;
 
     public Sprite puntarenas1;
     public Sprite puntarenas2;
+    public Sprite puntarenas3;
 
     public Sprite guanacaste1;
     public Sprite guanacaste2;
+    public Sprite guanacaste3;
 
     public Sprite limon1;
     public Sprite limon2;
+    public Sprite limon3;
 
     public Sprite cartago1;
     public Sprite cartago2;
+    public Sprite cartago3;
 
     #endregion
 
@@ -53,23 +60,16 @@ public class BgObjectSpawner : MonoBehaviour
     void CreateAreas()
     {
         int position = 0;
-        int length = 50;        
+        int length = 200;        
         BgObjectGroup group = null;
-
-        //IMPREZA
-        group = new BgObjectGroup("IMPREZA LTDA", position, length);
-        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "IMPREZA", null);
-        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.impreza1);
-        group.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
-        groups.Add(group);
-        position += length;
 
         //ALAJUELA
         group = new BgObjectGroup("ALAJUELA", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "ALAJUELA", null);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "TE AMO OSI", null);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela1);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela2);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela3);
         groups.Add(group);
         position += length;
 
@@ -77,7 +77,9 @@ public class BgObjectSpawner : MonoBehaviour
         group = new BgObjectGroup("SAN JOSE", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "SAN JOSE", null);        
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose1);
-        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose2);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose2);        
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose3);
         groups.Add(group);
         position += length;
 
@@ -86,6 +88,8 @@ public class BgObjectSpawner : MonoBehaviour
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "HEREDIA", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia1);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia2);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia3);        
         groups.Add(group);
         position += length;
 
@@ -94,6 +98,8 @@ public class BgObjectSpawner : MonoBehaviour
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "PUNTARENAS", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.puntarenas1);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.puntarenas2);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.puntarenas3);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         groups.Add(group);
         position += length;
 
@@ -102,6 +108,8 @@ public class BgObjectSpawner : MonoBehaviour
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "GUANACASTE", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.guanacaste1);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.guanacaste2);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.guanacaste3);
         groups.Add(group);
         position += length;
 
@@ -109,31 +117,37 @@ public class BgObjectSpawner : MonoBehaviour
         group = new BgObjectGroup("LIMON", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "LIMON", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.limon1);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.limon2);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.limon3);
         groups.Add(group);
         position += length;
 
         //CARTAGO
         group = new BgObjectGroup("CARTAGO", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "CARTAGO", null);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.cartago1);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.cartago2);
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.cartago3);
         groups.Add(group);
         position += length;
 
         //IMPREZA
         group = new BgObjectGroup("IMPREZA LTDA", position, length);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "IMPREZA", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.impreza1);
+        group.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
         groups.Add(group);
     }
 
     private void FixedUpdate()
     {
-        BgObjectGroup bog = GetBgObjectGroup(playerTransform.position.x); //Current bg object group in screen
+        BgObjectGroup bog = GetBgObjectGroup(spawnPosition.position.x); //Current bg object group in screen
         if (bog == null) return;
 
-        BgObject bo = bog.NextObject(playerTransform.position.x);
+        BgObject bo = bog.NextObject(spawnPosition.position.x);
         if (bo == null) return;
 
         GameObject go = null;
@@ -162,7 +176,7 @@ public class BgObjectSpawner : MonoBehaviour
         go.transform.position = new Vector3(spawnPosition.position.x, spawnPosition.position.y + height / 2, spawnPosition.position.z);        
     }
 
-    private BgObjectGroup GetBgObjectGroup(float positionX) {
+    public BgObjectGroup GetBgObjectGroup(float positionX) {
         foreach (BgObjectGroup bog in groups) {
             if (bog.IsInside(positionX)) {
                 return bog;
@@ -170,5 +184,25 @@ public class BgObjectSpawner : MonoBehaviour
         }
         return null;
     }
+
+    public BgObjectGroup GetNextBgObjectGroup(float positionX)
+    {
+        int current = -1;
+        for (int i=0; i < groups.Count; i++)
+        {
+            BgObjectGroup bog = groups[i];
+            if (bog.IsInside(positionX))
+            {
+                current = i;
+                break;
+            }
+        }
+        if (current != -1 && current < (groups.Count - 1))
+        {
+            return groups[current + 1];
+        }
+        return null;
+    }
+
 }
 
