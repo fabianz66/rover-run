@@ -27,6 +27,7 @@ public class PlayerPositionUI : MonoBehaviour
         //Get class that adds elements to the background
         BgObjectSpawner = GetComponent<BgObjectSpawner>();
         ImprezaDstText.text = "";
+        NextProvinceText.text = "";
     }
 
     // Update is called once per frame

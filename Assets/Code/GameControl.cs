@@ -195,18 +195,19 @@ public class GameControl : MonoBehaviour
         float secondsSinceLastCar = timerS - timeOfLastCarS;
         if (secondsSinceLastCar >= currentCarIntervalS)
         {
-            int rand = Random.Range(0, 3);
-            if (rand == 0)
-            {
-                AddObstacle(carPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Car");
-            }
-            else if (rand == 1)
-            {
-                AddObstacle(conePrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Cone");
-            }
-            else {
-                AddObstacle(rockPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Rock");
-            }            
+            //int rand = Random.Range(0, 3);
+            //if (rand == 0)
+            //{
+            //    AddObstacle(carPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Car");
+            //}
+            //else if (rand == 1)
+            //{
+            //    AddObstacle(conePrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Cone");
+            //}
+            //else {
+            //    AddObstacle(rockPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Rock");
+            //}
+            AddObstacle(carPrefab, ReusableCars, obstaclesSpawnGuide.position.x, playerTransform.position.y, obstaclesSpawnGuide.position.z, "Car");
             timeOfLastCarS = timerS;
         }
     }
