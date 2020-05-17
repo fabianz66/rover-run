@@ -2212,8 +2212,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -93.31}
-  m_SizeDelta: {x: 360, y: 35.328}
+  m_AnchoredPosition: {x: 20, y: -81.01}
+  m_SizeDelta: {x: 360, y: 26}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1171381437
 MonoBehaviour:
@@ -2235,7 +2235,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 21197ef52f75346a1bd0b74bcc6e2f34, type: 3}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -2246,7 +2246,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'IMPREZA EN: <>'
+  m_Text: DISTANCIA A IMPREZA
 --- !u!222 &1171381438
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2418,7 +2418,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 20, y: -10}
-  m_SizeDelta: {x: 285.55, y: 45.01}
+  m_SizeDelta: {x: 563.2, y: 45.01}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1226803012
 MonoBehaviour:
@@ -2451,7 +2451,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: RECORRE LAS 7 PROVINCIAS
+  m_Text: PROVINCIA ACTUAL
 --- !u!222 &1226803013
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2772,7 +2772,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378545899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.55, y: -2.71, z: 10}
+  m_LocalPosition: {x: -5.64, y: -3.14, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1447496148}
@@ -2793,7 +2793,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.07502508, y: -0.2572013}
+  m_Offset: {x: -0.054122925, y: -0.26068497}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2804,7 +2804,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.8752213, y: 0.9637172}
+  m_Size: {x: 3.833417, y: 0.9567499}
   m_EdgeRadius: 0
 --- !u!114 &1378545904
 MonoBehaviour:
@@ -2818,9 +2818,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c095b16fdd2c54cc2b836ce8d39aab57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _topLanePosition: {fileID: 1064490697}
-  _bottomLanePosition: {fileID: 1399464791}
+  TopLanePosition: {fileID: 1064490697}
+  BottomLanePosition: {fileID: 1399464791}
   IsAtTopLane: 0
+  CarBodyRenderer: {fileID: 1378545901}
+  LeftTireRenderer: {fileID: 1447496149}
+  RightTireRenderer: {fileID: 608118653}
 --- !u!95 &1378545905
 Animator:
   serializedVersion: 3
@@ -3344,8 +3347,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -55.01001}
-  m_SizeDelta: {x: 360, y: 38.3}
+  m_AnchoredPosition: {x: 20, y: -55.010254}
+  m_SizeDelta: {x: 360, y: 26}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1468465594
 MonoBehaviour:
@@ -3367,7 +3370,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 21197ef52f75346a1bd0b74bcc6e2f34, type: 3}
-    m_FontSize: 24
+    m_FontSize: 22
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3378,7 +3381,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Y LLEGA A IMPREZA LTDA
+  m_Text: PROVINCIA SIGUIENTE
 --- !u!222 &1468465595
 CanvasRenderer:
   m_ObjectHideFlags: 0

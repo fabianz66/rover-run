@@ -28,6 +28,7 @@ public class PlayerPositionUI : MonoBehaviour
         BgObjectSpawner = GetComponent<BgObjectSpawner>();
         ImprezaDstText.text = "";
         NextProvinceText.text = "";
+        CurrentProvinceText.text = "";
     }
 
     // Update is called once per frame

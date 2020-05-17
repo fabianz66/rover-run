@@ -84,7 +84,7 @@ public class GameControl : MonoBehaviour
         Time.timeScale = 1.0f;
 
         // Show message
-        //StartCoroutine(ShowSubtitleText("Bombeelo!", 2.0f));
+        StartCoroutine(ShowSubtitleText("Recorre las 7 provincias y llega a Impreza", 0.0f, 4.0f));
     }
 
     void Update()
