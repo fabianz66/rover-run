@@ -5,6 +5,7 @@ using UnityEngine;
 public class Street : MonoBehaviour
 {
     private float length, startpos;
+
     [SerializeField]
     public GameObject cam;
 

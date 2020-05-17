@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BgObjectSpawner : MonoBehaviour
 {
+    //Attributes
     public GameObject billboardPrefab;
     public GameObject locationPrefab;
     public GameObject roadSignGreenPrefab;
@@ -16,6 +17,9 @@ public class BgObjectSpawner : MonoBehaviour
 
     //All groups
     private readonly List<BgObjectGroup> groups = new List<BgObjectGroup>();
+
+    // Impreza Group
+    public BgObjectGroup imprezaBgGroup;
 
     #region All images to use in the background
 
@@ -54,13 +58,50 @@ public class BgObjectSpawner : MonoBehaviour
 
     private void Start()
     {
-        CreateAreas();
+        CreateGroups();
     }
 
-    void CreateAreas()
+    private void FixedUpdate()
+    {
+        BgObjectGroup bog = GetBgObjectGroup(spawnPosition.position.x); //Current bg object group in screen
+        if (bog == null) return;
+
+        BgObject bo = bog.NextObject(spawnPosition.position.x);
+        if (bo == null) return;
+
+        GameObject go = null;
+        switch (bo.Type) {
+            case BgObject.TYPE.ROAD_SIGN_GREEN:
+                go = Instantiate(roadSignGreenPrefab, parentTransform);
+                go.GetComponent<BgObjectText>().SetText(bo.Text);                    
+                break;
+            case BgObject.TYPE.BILLBOARD:
+                go = Instantiate(billboardPrefab, parentTransform);
+                go.GetComponent<BgObjectText>().SetText(bo.Text);
+                break;
+            case BgObject.TYPE.IMAGE:
+                go = Instantiate(locationPrefab, parentTransform);
+                go.GetComponent<BgObjectImage>().SetSprite(bo.Sprite);
+                break;
+            case BgObject.TYPE.FINISH_LINE:
+                go = Instantiate(finishLinePrefab, parentTransform);
+                go.name = "FinishLine"; // Check PlayerSpeed script.
+                break;
+        }
+
+        if (go == null) return;
+        
+        float height = go.GetComponent<SpriteRenderer>().bounds.size.y;
+        go.transform.position = new Vector3(spawnPosition.position.x, spawnPosition.position.y + height / 2, spawnPosition.position.z);        
+    }
+
+    /**
+     * Creates all groups that are shown in the background
+     * */
+    void CreateGroups()
     {
         int position = 0;
-        int length = 200;        
+        int length = 250;
         BgObjectGroup group = null;
 
         //ALAJUELA
@@ -75,10 +116,10 @@ public class BgObjectSpawner : MonoBehaviour
 
         //SAN JOSE
         group = new BgObjectGroup("SAN JOSE", position, length);
-        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "SAN JOSE", null);        
+        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "SAN JOSE", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose1);
         group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
-        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose2);        
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose2);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.sanJose3);
         groups.Add(group);
         position += length;
@@ -89,7 +130,7 @@ public class BgObjectSpawner : MonoBehaviour
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia1);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia2);
         group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
-        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia3);        
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia3);
         groups.Add(group);
         position += length;
 
@@ -134,48 +175,17 @@ public class BgObjectSpawner : MonoBehaviour
         position += length;
 
         //IMPREZA
-        group = new BgObjectGroup("IMPREZA LTDA", position, length);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
-        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "IMPREZA", null);
-        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.impreza1);
-        group.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
-        groups.Add(group);
+        imprezaBgGroup = new BgObjectGroup("IMPREZA LTDA", position, length);
+        imprezaBgGroup.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
+        imprezaBgGroup.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "IMPREZA", null);
+        imprezaBgGroup.AddBgObject(BgObject.TYPE.IMAGE, null, this.impreza1);
+        imprezaBgGroup.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
+        groups.Add(imprezaBgGroup);
     }
 
-    private void FixedUpdate()
-    {
-        BgObjectGroup bog = GetBgObjectGroup(spawnPosition.position.x); //Current bg object group in screen
-        if (bog == null) return;
-
-        BgObject bo = bog.NextObject(spawnPosition.position.x);
-        if (bo == null) return;
-
-        GameObject go = null;
-        switch (bo.Type) {
-            case BgObject.TYPE.ROAD_SIGN_GREEN:
-                go = Instantiate(roadSignGreenPrefab, parentTransform);
-                go.GetComponent<BgObjectText>().SetText(bo.Text);                    
-                break;
-            case BgObject.TYPE.BILLBOARD:
-                go = Instantiate(billboardPrefab, parentTransform);
-                go.GetComponent<BgObjectText>().SetText(bo.Text);
-                break;
-            case BgObject.TYPE.IMAGE:
-                go = Instantiate(locationPrefab, parentTransform);
-                go.GetComponent<BgObjectImage>().SetSprite(bo.Sprite);
-                break;
-            case BgObject.TYPE.FINISH_LINE:
-                go = Instantiate(finishLinePrefab, parentTransform);
-                go.name = "FinishLine"; // Check PlayerSpeed script.
-                break;
-        }
-
-        if (go == null) return;
-        
-        float height = go.GetComponent<SpriteRenderer>().bounds.size.y;
-        go.transform.position = new Vector3(spawnPosition.position.x, spawnPosition.position.y + height / 2, spawnPosition.position.z);        
-    }
-
+    /**
+     * Gets a position in X and returns the current group
+     * */
     public BgObjectGroup GetBgObjectGroup(float positionX) {
         foreach (BgObjectGroup bog in groups) {
             if (bog.IsInside(positionX)) {
@@ -185,6 +195,9 @@ public class BgObjectSpawner : MonoBehaviour
         return null;
     }
 
+    /**
+     * Gets a position in X and returns the next group after the current one
+     * */
     public BgObjectGroup GetNextBgObjectGroup(float positionX)
     {
         int current = -1;
@@ -203,6 +216,5 @@ public class BgObjectSpawner : MonoBehaviour
         }
         return null;
     }
-
 }
 

@@ -215,6 +215,7 @@ RectTransform:
   - {fileID: 685944453}
   - {fileID: 1226803011}
   - {fileID: 1468465593}
+  - {fileID: 1171381436}
   - {fileID: 31635715}
   - {fileID: 1212004135}
   - {fileID: 1708627114}
@@ -261,7 +262,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 30509703}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -584,7 +585,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 30509703}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -661,7 +662,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 30509703}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -814,9 +815,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 178507843}
-  - component: {fileID: 178507845}
   - component: {fileID: 178507844}
+  - component: {fileID: 178507845}
   - component: {fileID: 178507846}
+  - component: {fileID: 178507847}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -946,10 +948,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7097fcd9894942a9a3944a95148b87f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _highScoreText: {fileID: 1468465594}
-  _currentScoreText: {fileID: 1226803012}
-  mainText: {fileID: 81870010}
-  secondaryText: {fileID: 141467246}
+  TitleText: {fileID: 81870010}
+  SubtitleText: {fileID: 141467246}
   obstaclesSpawnGuide: {fileID: 1872370680}
   MuteUnmuteButton: {fileID: 1279348819}
   MutedSprite: {fileID: 21300000, guid: 9aaf38bb0e56f4408b39f8363e810c33, type: 3}
@@ -1010,6 +1010,22 @@ MonoBehaviour:
   cartago1: {fileID: 21300000, guid: d13a9559ea3254221bb026da159802be, type: 3}
   cartago2: {fileID: 21300000, guid: d13a9559ea3254221bb026da159802be, type: 3}
   cartago3: {fileID: 0}
+--- !u!114 &178507847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178507842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f871d7479dd9f4b928ce965c1154d4be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentProvinceText: {fileID: 1226803012}
+  NextProvinceText: {fileID: 1468465594}
+  ImprezaDstText: {fileID: 1171381437}
+  PlayerTransform: {fileID: 1378545902}
 --- !u!1 &257953209
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,7 +1461,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608118651}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.35, y: -2, z: 0}
+  m_LocalPosition: {x: 1.35, y: -0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1378545902}
@@ -1514,9 +1530,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.018507957}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.1497049
+  m_Radius: 0.48
 --- !u!1 &685944452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,6 +2178,83 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1171381435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1171381436}
+  - component: {fileID: 1171381438}
+  - component: {fileID: 1171381437}
+  m_Layer: 17
+  m_Name: ImprezaRestante
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1171381436
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171381435}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 30509703}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 20, y: -93.31}
+  m_SizeDelta: {x: 360, y: 35.328}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1171381437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171381435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.2901961, b: 0.13333334, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 21197ef52f75346a1bd0b74bcc6e2f34, type: 3}
+    m_FontSize: 24
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 40
+    m_Alignment: 3
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'IMPREZA EN: <>'
+--- !u!222 &1171381438
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1171381435}
+  m_CullTransparentMesh: 0
 --- !u!1 &1212004134
 GameObject:
   m_ObjectHideFlags: 0
@@ -2193,7 +2286,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 30509703}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2302,7 +2395,7 @@ GameObject:
   - component: {fileID: 1226803013}
   - component: {fileID: 1226803012}
   m_Layer: 17
-  m_Name: YourScore
+  m_Name: ProvinciaActual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2347,7 +2440,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7751c812eb0b34723bb8e9036672e704, type: 3}
-    m_FontSize: 30
+    m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -2358,7 +2451,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ESTAS EN: PROVINCIA'
+  m_Text: RECORRE LAS 7 PROVINCIAS
 --- !u!222 &1226803013
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2398,7 +2491,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 30509703}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2680,7 +2773,7 @@ Transform:
   m_GameObject: {fileID: 1378545899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.55, y: -2.71, z: 10}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1447496148}
   - {fileID: 608118652}
@@ -2700,18 +2793,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.026304245, y: -0.73641837}
+  m_Offset: {x: -0.07502508, y: -0.2572013}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 10.24, y: 5.12}
+    oldSize: {x: 4.1, y: 2.05}
     newSize: {x: 6.4, y: 2.82}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10.04892, y: 2.0523803}
+  m_Size: {x: 3.8752213, y: 0.9637172}
   m_EdgeRadius: 0
 --- !u!114 &1378545904
 MonoBehaviour:
@@ -3145,7 +3238,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1447496147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -2, z: 0}
+  m_LocalPosition: {x: -1.2, y: -0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1378545902}
@@ -3214,9 +3307,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.03701496, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 1.1682119
+  m_Radius: 0.48
 --- !u!1 &1468465592
 GameObject:
   m_ObjectHideFlags: 0
@@ -3229,7 +3322,7 @@ GameObject:
   - component: {fileID: 1468465595}
   - component: {fileID: 1468465594}
   m_Layer: 17
-  m_Name: HighScore
+  m_Name: ProvinciaSiguiente
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3251,8 +3344,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -51.799805}
-  m_SizeDelta: {x: 360, y: 49.5}
+  m_AnchoredPosition: {x: 20, y: -55.01001}
+  m_SizeDelta: {x: 360, y: 38.3}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1468465594
 MonoBehaviour:
@@ -3274,7 +3367,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 21197ef52f75346a1bd0b74bcc6e2f34, type: 3}
-    m_FontSize: 30
+    m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -3285,7 +3378,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LLEGANDO A PROVINCIA EN 1000
+  m_Text: Y LLEGA A IMPREZA LTDA
 --- !u!222 &1468465595
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3325,7 +3418,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 30509703}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -3568,7 +3661,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 30509703}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}

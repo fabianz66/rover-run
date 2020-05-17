@@ -7,17 +7,10 @@ using UnityEngine.SceneManagement;
 public class GameControl : MonoBehaviour
 {
     [SerializeField]
-    Text _highScoreText;
+    Text TitleText;
 
     [SerializeField]
-    Text _currentScoreText;
-    int _currentScore;
-
-    [SerializeField]
-    Text mainText;
-
-    [SerializeField]
-    Text secondaryText;
+    Text SubtitleText;
 
     [SerializeField]
     public Transform obstaclesSpawnGuide;
@@ -56,8 +49,8 @@ public class GameControl : MonoBehaviour
     private Rigidbody2D playerRigidBody;
     private Transform playerTransform;
     private AudioSource playerAudio;
-    private PlayerControl playerControl;
-    private PlayerSpeed playerSpeed;
+    //private PlayerControl playerControl;
+    //private PlayerSpeed playerSpeed;
 
     //Interval in seconds of when to spawn a new car
     private const float initialCarIntervalS = 6.0f;
@@ -65,17 +58,14 @@ public class GameControl : MonoBehaviour
     private float currentCarIntervalS = 0.0f;    
     private float timeOfLastCarS = 0.0f;
 
-    //Class in charge of adding elements to the background
-    private BgObjectSpawner bgObjectSpawner;
-
     // If the user lost
     private bool gameOver = false;
 
     private void Start()
     {
         //Initial UI
-        mainText.enabled = false;
-        secondaryText.enabled = false;
+        TitleText.enabled = false;
+        SubtitleText.enabled = false;
         if (AudioListener.volume == 0) {
             MuteUnmuteButton.image.sprite = MutedSprite;
         } else {
@@ -86,49 +76,27 @@ public class GameControl : MonoBehaviour
         playerRigidBody = player.GetComponent<Rigidbody2D>();
         playerAudio = player.GetComponent<AudioSource>();
         playerTransform = player.GetComponent<Transform>();
-        playerControl = player.GetComponent<PlayerControl>();
-        playerSpeed = player.GetComponent<PlayerSpeed>();
+        //playerControl = player.GetComponent<PlayerControl>();
+        //playerSpeed = player.GetComponent<PlayerSpeed>();
         currentCarIntervalS = initialCarIntervalS;
-
-        //Get class that adds elements to the background
-        bgObjectSpawner = GetComponent<BgObjectSpawner>();
-
-        // Show high score
-        UpdateHighScore();
 
         //Resume time
         Time.timeScale = 1.0f;
 
         // Show message
-        StartCoroutine(ShowSecondaryText("Bombeelo!", 2.0f));
+        //StartCoroutine(ShowSubtitleText("Bombeelo!", 2.0f));
     }
 
     void Update()
     {
         timerS += Time.deltaTime;
-        _currentScore = (int)playerTransform.position.x;
-        _currentScore = Mathf.Max(0, _currentScore);
-        currentCarIntervalS = initialCarIntervalS - 0.5f * (_currentScore / 100.0f);
+        currentCarIntervalS = initialCarIntervalS - 0.5f * (playerTransform.position.x / 100.0f);
         currentCarIntervalS = Mathf.Max(currentCarIntervalS, minCarIntervalS);
     }
 
     private void FixedUpdate()
     {
         AddCar();
-        AddCone();
-        if (_currentScore == 100) {
-            StartCoroutine(ShowSecondaryText("Ya va a 100... a100do presa!", 0f));
-        }
-
-        BgObjectGroup bog = bgObjectSpawner.GetBgObjectGroup(playerTransform.position.x);
-        if (bog == null) return;
-
-        _currentScoreText.text = "ESTAS EN " + bog.name;
-
-        bog = bgObjectSpawner.GetNextBgObjectGroup(playerTransform.position.x);
-        if (bog == null) return;
-
-        _highScoreText.text = "LLEGANDO A " + bog.name + " EN " + (int)(bog.startPositionX - player.transform.position.x);
     }
 
     public void MainMenu()
@@ -153,15 +121,15 @@ public class GameControl : MonoBehaviour
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            mainText.enabled = false;
+            TitleText.enabled = false;
             playerAudio.UnPause();
             PauseResumeButton.image.sprite = ResumedSprite;
         }
         else
         {
             Time.timeScale = 0;
-            mainText.text = "PAUSA";            
-            mainText.enabled = true;
+            TitleText.text = "PAUSA";            
+            TitleText.enabled = true;
             PauseResumeButton.image.sprite = PausedSprite;
             playerAudio.Pause();
         }
@@ -183,48 +151,35 @@ public class GameControl : MonoBehaviour
 
     public void GameOver()
     {
-        mainText.text = "FIN DEL VIAJE\nDISTANCIA: " + _currentScore;
-        mainText.enabled = true;
-        secondaryText.enabled = false;
+        TitleText.text = "¡PERDISTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x;
+        TitleText.enabled = true;
+        SubtitleText.enabled = false;
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().Play();        
-        UpdateHighScore(); // Show high score
         Time.timeScale = 0.0f;
     }
 
     public void GameCompleted()
     {
-        mainText.text = "JUEGO COMPLETADO\nDISTANCIA: " + _currentScore;
-        mainText.enabled = true;
-        secondaryText.enabled = false;
+        TitleText.text = "¡LLEGASTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x;
+        TitleText.enabled = true;
+        SubtitleText.enabled = false;
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().Stop();
         GetComponent<AudioSource>().Play();
-        UpdateHighScore(); // Show high score
         Time.timeScale = 0.0f;
     }
 
-    public void UpdateHighScore()
-    {
-        int highScore = PlayerPrefs.GetInt("high_score");
-        if (_currentScore > highScore)
-        {
-            PlayerPrefs.SetInt("high_score", _currentScore);
-            PlayerPrefs.Save();
-        }
-        _highScoreText.text = "DISTANCIA MAXIMA: " + highScore;
-    }
-
-    IEnumerator ShowSecondaryText(string text, float delay, float duration = 5.0f)
+    IEnumerator ShowSubtitleText(string text, float delay, float duration = 5.0f)
     {
         yield return new WaitForSeconds(delay);
-        secondaryText.text = text;
-        secondaryText.enabled = true;
+        SubtitleText.text = text;
+        SubtitleText.enabled = true;
         yield return new WaitForSeconds(duration);
-        secondaryText.enabled = false;
+        SubtitleText.enabled = false;
     }
 
     public void RestartGame()
@@ -254,12 +209,6 @@ public class GameControl : MonoBehaviour
             }            
             timeOfLastCarS = timerS;
         }
-    }
-
-    private void AddCone()
-    {
-        //Don't do anything at the beginning
-        if (playerRigidBody.velocity.x < 1.0f) return;
     }
 
     private void AddObstacle(GameObject prefab, Queue<GameObject> reusableQueue, float x, float y, float z, string name)
