@@ -5,15 +5,15 @@ using UnityEngine;
 public class CarObstacleUI : MonoBehaviour
 {
     [SerializeField]
-    Sprite[] CarSprites;
+    public Sprite[] CarSprites;
     [SerializeField]
-    Sprite[] TireSprites;
+    public Sprite[] TireSprites;
     [SerializeField]
-    SpriteRenderer LeftTireSprite;
+    public SpriteRenderer LeftTireSprite;
     [SerializeField]
-    SpriteRenderer RightTireSprite;
+    public SpriteRenderer RightTireSprite;
     [SerializeField]
-    SpriteRenderer CarSprite;
+    public SpriteRenderer CarSprite;
 
     void Start()
     {        

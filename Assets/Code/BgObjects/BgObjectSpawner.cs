@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class BgObjectSpawner : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class BgObjectSpawner : MonoBehaviour
     public GameObject locationPrefab;
     public GameObject roadSignGreenPrefab;
     public GameObject finishLinePrefab;
+    public GameObject increaseSpeedPrefab;
     public Transform playerTransform;
     public Transform spawnPosition;
 
@@ -87,6 +89,10 @@ public class BgObjectSpawner : MonoBehaviour
                 go = Instantiate(finishLinePrefab, parentTransform);
                 go.name = "FinishLine"; // Check PlayerSpeed script.
                 break;
+            case BgObject.TYPE.INCREASE_SPEED:
+                go = Instantiate(increaseSpeedPrefab, parentTransform);
+                go.name = "IncreaseSpeed"; // Check PlayerSpeed script.
+                break;
         }
 
         if (go == null) return;
@@ -131,6 +137,7 @@ public class BgObjectSpawner : MonoBehaviour
         //HEREDIA
         group = new BgObjectGroup("HEREDIA", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "HEREDIA", null);
+        group.AddBgObject(BgObject.TYPE.INCREASE_SPEED, null, null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia1);
         group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         groups.Add(group);

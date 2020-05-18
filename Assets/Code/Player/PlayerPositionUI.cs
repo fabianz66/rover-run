@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class PlayerPositionUI : MonoBehaviour
 {
     [SerializeField]
-    Text CurrentProvinceText;
+    public Text CurrentProvinceText;
 
     [SerializeField]
-    Text NextProvinceText;
+    public Text NextProvinceText;
 
     [SerializeField]
-    Text ImprezaDstText;
+    public Text ImprezaDstText;
  
     [SerializeField]
     // Player transform to get the position
-    Transform PlayerTransform;
+    public Transform PlayerTransform;
 
     //Class in charge of adding elements to the background
     private BgObjectSpawner BgObjectSpawner;

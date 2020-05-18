@@ -6,30 +6,15 @@ public class PlayerSpeed : MonoBehaviour
 {
     [SerializeField]
     public GameObject gameController;
-
-    //Player rigid body
-    private Rigidbody2D rigidBody;
+   
+    [SerializeField]
+    public Rigidbody2D playerRigidBody;
 
     //Acceleration applied to the player
-    private float acceleration = 40.0f;
-
-    //Initial max velocity X
-    private float initialMaxVelocity = 8.0f;
+    private float acceleration = 200f;
 
     //Final max velocity X
-    public float finalMaxVelocity = 14.0f;
-
-    //Current max velocity X
-    private float currentMaxVelocity = 0.0f;
-
-    // By how much is _currentMaxVelocity increased every _speedIncreaseIntervalS
-    private float speedIncrease = 1.0f;
-
-    //How often is _currentMaxVelocity inscreased in seconds
-    private float speedIncreaseIntervalS = 8.0f;
-
-    //Records the time at which the game started
-    private float gameStartTimeS = 0.0f;
+    private float maxVelocity = 13.0f;
 
     //This flags determines wether the car moves or not
     private bool playerMoving = false;
@@ -39,22 +24,8 @@ public class PlayerSpeed : MonoBehaviour
 
     void Start()
     {
-        rigidBody = this.GetComponent<Rigidbody2D>();        
-        currentMaxVelocity = initialMaxVelocity;
-        gameStartTimeS = Time.time + initialDelayS;
         this.GetComponent<Animator>().enabled = false;
         Invoke("StartMoving", initialDelayS);//Initial delay to start moving and animating
-    }
-
-    void Update()
-    {
-        //How many time we should have increased _currentMaxVelocity so far
-        float elapsedTimeS = (Time.time - gameStartTimeS);
-        float intervals = Mathf.Floor(elapsedTimeS / speedIncreaseIntervalS);
-
-        //Increase _currentMaxVelocity
-        currentMaxVelocity = initialMaxVelocity + intervals * speedIncrease;
-        currentMaxVelocity = Mathf.Min(currentMaxVelocity, finalMaxVelocity);
     }
 
     void FixedUpdate()
@@ -63,9 +34,9 @@ public class PlayerSpeed : MonoBehaviour
         if (playerMoving == false) return;
 
         // Add force to player if he hasn't reached _currentMaxVelocity
-        if (rigidBody.velocity.x < currentMaxVelocity)
+        if (playerRigidBody.velocity.x < maxVelocity)
         {
-            rigidBody.AddForce(Vector2.right * acceleration);
+            playerRigidBody.AddForce(Vector2.right * acceleration);
         }
     }
 
@@ -76,7 +47,9 @@ public class PlayerSpeed : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Car" || Mathf.Abs(rigidBody.transform.rotation.z) > 0.9f)
+        if (playerMoving == false) return;
+
+        if (collision.gameObject.name == "Car(Clone)" || Mathf.Abs(playerRigidBody.transform.rotation.z) > 0.9f)
         {
             gameController.GetComponent<GameControl>().GameOver();
         }
@@ -84,9 +57,16 @@ public class PlayerSpeed : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (playerMoving == false) return;
+
         if (collision.gameObject.name == "FinishLine")
         {
             gameController.GetComponent<GameControl>().GameCompleted();
+        }
+
+        if (collision.gameObject.name == "IncreaseSpeed")
+        {
+            maxVelocity = 15.0f;
         }
     }
 }

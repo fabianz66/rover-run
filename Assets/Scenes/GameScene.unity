@@ -819,6 +819,7 @@ GameObject:
   - component: {fileID: 178507845}
   - component: {fileID: 178507846}
   - component: {fileID: 178507847}
+  - component: {fileID: 178507848}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -950,19 +951,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TitleText: {fileID: 81870010}
   SubtitleText: {fileID: 141467246}
-  obstaclesSpawnGuide: {fileID: 1872370680}
   MuteUnmuteButton: {fileID: 1279348819}
   MutedSprite: {fileID: 21300000, guid: 9aaf38bb0e56f4408b39f8363e810c33, type: 3}
   UnmutedSprite: {fileID: 21300000, guid: 2de8fa450e07e4dd7a07c2aee322c3fc, type: 3}
   PauseResumeButton: {fileID: 31635716}
   PausedSprite: {fileID: 21300000, guid: 77fee2648dc1144d58eb62a97eaa8438, type: 3}
   ResumedSprite: {fileID: 21300000, guid: ad9330b9e661c4455a524aecc971f057, type: 3}
-  carPrefab: {fileID: 6823311276920408620, guid: ab00307514f0f49b38da66cf5ad860b9,
-    type: 3}
-  conePrefab: {fileID: 3615888355083908250, guid: a28c3c466f58745ab91ecd88b41486f4,
-    type: 3}
-  rockPrefab: {fileID: 476205999652916354, guid: 178dc4229bb5e44b685c1c625585f3d0,
-    type: 3}
   player: {fileID: 1378545899}
 --- !u!114 &178507846
 MonoBehaviour:
@@ -983,6 +977,8 @@ MonoBehaviour:
   roadSignGreenPrefab: {fileID: 1518566058122577852, guid: 5cc9e0f46b9a244f6b6efb3b10a2b555,
     type: 3}
   finishLinePrefab: {fileID: 7662129925141450189, guid: 91df7aa629e684988885ef8559d7a2fa,
+    type: 3}
+  increaseSpeedPrefab: {fileID: 7662129925141450189, guid: 1a01f7b97746145baabf889d9db47f95,
     type: 3}
   playerTransform: {fileID: 1378545902}
   spawnPosition: {fileID: 1872370680}
@@ -1026,6 +1022,31 @@ MonoBehaviour:
   NextProvinceText: {fileID: 1468465594}
   ImprezaDstText: {fileID: 1171381437}
   PlayerTransform: {fileID: 1378545902}
+--- !u!114 &178507848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 178507842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12caad2bd66bc4d8faf0f7315d242cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnGuide: {fileID: 1872370680}
+  carPrefab: {fileID: 6823311276920408620, guid: ab00307514f0f49b38da66cf5ad860b9,
+    type: 3}
+  conePrefab: {fileID: 3615888355083908250, guid: a28c3c466f58745ab91ecd88b41486f4,
+    type: 3}
+  rockPrefab: {fileID: 476205999652916354, guid: 178dc4229bb5e44b685c1c625585f3d0,
+    type: 3}
+  player: {fileID: 1378545899}
+  playerTransform: {fileID: 1378545902}
+  playerRigidBody: {fileID: 1378545900}
+  playerSpriteRenderer: {fileID: 1378545901}
+  TopLanePosition: {fileID: 1064490697}
+  BottomLanePosition: {fileID: 1399464791}
 --- !u!1 &257953209
 GameObject:
   m_ObjectHideFlags: 0
@@ -2212,7 +2233,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -81.01}
+  m_AnchoredPosition: {x: 20, y: -81.01001}
   m_SizeDelta: {x: 360, y: 26}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1171381437
@@ -2705,10 +2726,10 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 7
+  m_Mass: 15
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -2820,7 +2841,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TopLanePosition: {fileID: 1064490697}
   BottomLanePosition: {fileID: 1399464791}
-  IsAtTopLane: 0
+  CurrentLane: {fileID: 0}
   CarBodyRenderer: {fileID: 1378545901}
   LeftTireRenderer: {fileID: 1447496149}
   RightTireRenderer: {fileID: 608118653}
@@ -2952,7 +2973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 178507842}
-  finalMaxVelocity: 15
+  playerRigidBody: {fileID: 1378545900}
 --- !u!114 &1378545908
 MonoBehaviour:
   m_ObjectHideFlags: 0

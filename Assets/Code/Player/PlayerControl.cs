@@ -10,12 +10,15 @@ public class PlayerControl : MonoBehaviour
     [SerializeField]
     public Transform BottomLanePosition;
 
+    //The current lane transform of the car
+    public Transform CurrentLane;
+
     //Flags that indicate which direction we should move
     private bool MoveUp;
     private bool MoveDown;
 
     //Boolean that indicates if the car is at top position
-    public bool IsAtTopLane;
+    //public bool IsAtTopLane;
 
     //The height of the car
     private float PlayerHeight;
@@ -31,9 +34,9 @@ public class PlayerControl : MonoBehaviour
 
     public void Start()
     {
-        transform.position = new Vector3(transform.position.x, BottomLanePosition.position.y + 1.5f, transform.position.z);
-        IsAtTopLane = false;
+        CurrentLane = BottomLanePosition;
         PlayerHeight = CarBodyRenderer.bounds.size.y;
+        transform.position = new Vector3(transform.position.x, BottomLanePosition.position.y + PlayerHeight/2, transform.position.z);        
     }
 
     void Update()
@@ -47,7 +50,7 @@ public class PlayerControl : MonoBehaviour
         if (MoveUp) {
             transform.position = new Vector3(transform.position.x, TopLanePosition.position.y + PlayerHeight / 2, transform.position.z);
             MoveUp = false;
-            IsAtTopLane = true;
+            CurrentLane = TopLanePosition;
             CarBodyRenderer.sortingOrder = 11;
             LeftTireRenderer.sortingOrder = 12;
             RightTireRenderer.sortingOrder = 12;            
@@ -56,7 +59,7 @@ public class PlayerControl : MonoBehaviour
         if (MoveDown) {
             transform.position = new Vector3(transform.position.x, BottomLanePosition.position.y + PlayerHeight / 2, transform.position.z);
             MoveDown = false;
-            IsAtTopLane = false;
+            CurrentLane = BottomLanePosition;
             CarBodyRenderer.sortingOrder = 15;
             LeftTireRenderer.sortingOrder = 16;
             RightTireRenderer.sortingOrder = 16;
@@ -82,7 +85,7 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            if (IsAtTopLane)
+            if (CurrentLane == TopLanePosition)
             {
                 MoveDown = true;
             }
