@@ -53,7 +53,7 @@ public class ObstaclesSpawner : MonoBehaviour
     {
         playerControl = player.GetComponent<PlayerControl>();
         playerWidth = playerSpriteRenderer.bounds.size.x;
-        minDistanceBetweenCars = playerWidth * 2.15f;
+        minDistanceBetweenCars = playerWidth * 2.195f;
     }
 
     private void FixedUpdate()
@@ -88,6 +88,8 @@ public class ObstaclesSpawner : MonoBehaviour
         latestLane = lane;
     }
 
+    // Not so random anymore.
+    // 2 cones cant be next to each other.
     private GameObject RandomObject(bool includeRock)
     {
         int rand = Random.Range(1, 10);
@@ -97,6 +99,10 @@ public class ObstaclesSpawner : MonoBehaviour
         }
         else if (rand > 2) // 3, 4 , 5
         {
+            if(latestObject != null && latestObject.name == "Cone(Clone)")
+            {
+                return carPrefab;
+            }
             return conePrefab;
         }        
         if (includeRock) // 1, 2

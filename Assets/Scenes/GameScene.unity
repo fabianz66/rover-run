@@ -1298,7 +1298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1378545902}
-  _offsetX: 5.5
+  _offsetX: 6
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
