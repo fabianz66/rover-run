@@ -10,9 +10,6 @@ public class GameControl : MonoBehaviour
     public Text TitleText;
 
     [SerializeField]
-    public Text SubtitleText;
-
-    [SerializeField]
     public Button MuteUnmuteButton;
 
     [SerializeField]
@@ -30,6 +27,9 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     public Sprite ResumedSprite;
 
+    [SerializeField]
+    public AudioClip GameCompletedMusic;
+
     //Player information
     [SerializeField]
     public GameObject player;
@@ -43,7 +43,6 @@ public class GameControl : MonoBehaviour
     {
         //Initial UI
         TitleText.enabled = false;
-        SubtitleText.enabled = false;
         if (AudioListener.volume == 0) {
             MuteUnmuteButton.image.sprite = MutedSprite;
         } else {
@@ -56,9 +55,6 @@ public class GameControl : MonoBehaviour
 
         //Resume time
         Time.timeScale = 1.0f;
-
-        // Show message
-        StartCoroutine(ShowSubtitleText("Recorre las 7 provincias y llega a Impreza", 0.0f, 4.0f));
     }
 
     public void MainMenu()
@@ -115,7 +111,6 @@ public class GameControl : MonoBehaviour
     {
         TitleText.text = "¡PERDISTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x;
         TitleText.enabled = true;
-        SubtitleText.enabled = false;
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().Stop();
@@ -127,21 +122,11 @@ public class GameControl : MonoBehaviour
     {
         TitleText.text = "¡LLEGASTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x;
         TitleText.enabled = true;
-        SubtitleText.enabled = false;
         gameOver = true;
         playerAudio.Stop();
-        Camera.main.GetComponent<AudioSource>().Stop();
-        GetComponent<AudioSource>().Play();
+        Camera.main.GetComponent<AudioSource>().clip = GameCompletedMusic;
+        Camera.main.GetComponent<AudioSource>().Play();
         Time.timeScale = 0.0f;
-    }
-
-    IEnumerator ShowSubtitleText(string text, float delay, float duration = 5.0f)
-    {
-        yield return new WaitForSeconds(delay);
-        SubtitleText.text = text;
-        SubtitleText.enabled = true;
-        yield return new WaitForSeconds(duration);
-        SubtitleText.enabled = false;
     }
 
     public void RestartGame()

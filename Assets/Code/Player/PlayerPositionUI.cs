@@ -6,12 +6,6 @@ using UnityEngine.UI;
 public class PlayerPositionUI : MonoBehaviour
 {
     [SerializeField]
-    public Text CurrentProvinceText;
-
-    [SerializeField]
-    public Text NextProvinceText;
-
-    [SerializeField]
     public Text ImprezaDstText;
  
     [SerializeField]
@@ -27,39 +21,19 @@ public class PlayerPositionUI : MonoBehaviour
         //Get class that adds elements to the background
         BgObjectSpawner = GetComponent<BgObjectSpawner>();
         ImprezaDstText.text = "";
-        NextProvinceText.text = "";
-        CurrentProvinceText.text = "";
     }
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-        BgObjectGroup bog = BgObjectSpawner.GetBgObjectGroup(PlayerTransform.position.x);
-        if (bog == null) {
-            return;            
-        }
-
-        //Update current province
-        CurrentProvinceText.text = bog.name;
-
-        //Get next province
-        bog = BgObjectSpawner.GetNextBgObjectGroup(PlayerTransform.position.x);
-        if (bog != null)
-        {
-            int dist = (int)(bog.startPositionX - PlayerTransform.transform.position.x);
-            NextProvinceText.text = bog.name + " en: " + Mathf.Max(dist, 0);
-        } else {
-            NextProvinceText.enabled = false;
-        }
-
+    {     
         //Get distance to impreza
-        bog = BgObjectSpawner.imprezaBgGroup;
+        BgObjectGroup bog = BgObjectSpawner.imprezaBgGroup;
         if (bog != null)
         {
-            int dist = (int)(bog.startPositionX - PlayerTransform.transform.position.x);
+            int dist = (int)(bog.endPositionX - PlayerTransform.transform.position.x);
             if (dist > 0)
             {
-                ImprezaDstText.text = bog.name + " en: " + Mathf.Max(dist, 0);
+                ImprezaDstText.text = "" + Mathf.Max(dist, 0);
             } else {
                 ImprezaDstText.enabled = false;
             }

@@ -114,7 +114,8 @@ public class BgObjectSpawner : MonoBehaviour
         group = new BgObjectGroup("ALAJUELA", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "ALAJUELA", null);
         group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
-        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela1);        
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela1);
+        group.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
         groups.Add(group);
         position += length;
 
