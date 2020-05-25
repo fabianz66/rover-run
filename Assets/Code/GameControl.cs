@@ -10,6 +10,9 @@ public class GameControl : MonoBehaviour
     public Text TitleText;
 
     [SerializeField]
+    public GameObject TitleBg;
+
+    [SerializeField]
     public Button MuteUnmuteButton;
 
     [SerializeField]
@@ -42,7 +45,7 @@ public class GameControl : MonoBehaviour
     private void Start()
     {
         //Initial UI
-        TitleText.enabled = false;
+        SetTitle(null);
         if (AudioListener.volume == 0) {
             MuteUnmuteButton.image.sprite = MutedSprite;
         } else {
@@ -79,15 +82,14 @@ public class GameControl : MonoBehaviour
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
-            TitleText.enabled = false;
+            SetTitle(null);
             playerAudio.UnPause();
             PauseResumeButton.image.sprite = ResumedSprite;
         }
         else
         {
             Time.timeScale = 0;
-            TitleText.text = "PAUSA";            
-            TitleText.enabled = true;
+            SetTitle("PAUSA");
             PauseResumeButton.image.sprite = PausedSprite;
             playerAudio.Pause();
         }
@@ -109,8 +111,7 @@ public class GameControl : MonoBehaviour
 
     public void GameOver()
     {
-        TitleText.text = "¡PERDISTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x;
-        TitleText.enabled = true;
+        SetTitle("¡PERDISTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x);
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().Stop();
@@ -120,8 +121,7 @@ public class GameControl : MonoBehaviour
 
     public void GameCompleted()
     {
-        TitleText.text = "¡LLEGASTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x;
-        TitleText.enabled = true;
+        SetTitle("¡LLEGASTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x);
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().clip = GameCompletedMusic;
@@ -132,5 +132,21 @@ public class GameControl : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    private void SetTitle(string text)
+    {
+        if (text != null)
+        {
+            TitleText.text = text;
+            TitleText.enabled = true;
+            TitleBg.SetActive(true);
+        }
+        else
+        {
+            TitleText.text = text;
+            TitleText.enabled = false;
+            TitleBg.SetActive(false);
+        }        
     }
 }

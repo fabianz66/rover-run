@@ -26,35 +26,26 @@ public class BgObjectSpawner : MonoBehaviour
     #region All images to use in the background
 
     public Sprite impreza1;
-    public Sprite impreza2;
 
     public Sprite alajuela1;
-    public Sprite alajuela2;
-    public Sprite alajuela3;
 
     public Sprite sanJose1;
-    public Sprite sanJose2;
-    public Sprite sanJose3;
 
     public Sprite heredia1;
-    public Sprite heredia2;
-    public Sprite heredia3;
 
     public Sprite puntarenas1;
-    public Sprite puntarenas2;
-    public Sprite puntarenas3;
 
     public Sprite guanacaste1;
-    public Sprite guanacaste2;
-    public Sprite guanacaste3;
 
     public Sprite limon1;
-    public Sprite limon2;
-    public Sprite limon3;
 
     public Sprite cartago1;
-    public Sprite cartago2;
-    public Sprite cartago3;
+
+    #endregion
+
+    #region All images to use in the background
+
+    public Sprite adConstruYO1;
 
     #endregion
 
@@ -79,7 +70,7 @@ public class BgObjectSpawner : MonoBehaviour
                 break;
             case BgObject.TYPE.BILLBOARD:
                 go = Instantiate(billboardPrefab, parentTransform);
-                go.GetComponent<BgObjectText>().SetText(bo.Text);
+                //go.GetComponent<BgObjectImage>().SetSprite(bo.Sprite);
                 break;
             case BgObject.TYPE.IMAGE:
                 go = Instantiate(locationPrefab, parentTransform);
@@ -115,7 +106,6 @@ public class BgObjectSpawner : MonoBehaviour
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "ALAJUELA", null);
         group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela1);
-        group.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
         groups.Add(group);
         position += length;
 
