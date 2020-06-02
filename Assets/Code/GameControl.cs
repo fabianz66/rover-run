@@ -9,7 +9,7 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     public Text TitleText;
 
-    [SerializeField]
+    //[SerializeField]
     public GameObject TitleBg;
 
     [SerializeField]
@@ -116,7 +116,7 @@ public class GameControl : MonoBehaviour
 
     public void GameCompleted()
     {
-        SetTitle("¡LLEGASTE!\nDISTANCIA RECORRIDA: " + (int)playerTransform.position.x);
+        SetTitle("¡LLEGASTE!");
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().clip = GameCompletedMusic;

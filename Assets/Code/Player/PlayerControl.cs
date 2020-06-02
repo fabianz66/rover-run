@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -83,16 +84,21 @@ public class PlayerControl : MonoBehaviour
     {
         if (Input.touchCount == 0) return;
 
-        if (Input.GetTouch(0).phase == TouchPhase.Began)
+        Touch t = Input.GetTouch(0);
+        if (t.phase != TouchPhase.Began) return;
+
+        //if (EventSystem.current.IsPointerOverGameObject()) return;
+
+        // Check if finger is over a UI element
+        if (EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId)) return;
+
+        if (CurrentLane == TopLanePosition)
         {
-            if (CurrentLane == TopLanePosition)
-            {
-                MoveDown = true;
-            }
-            else
-            {
-                MoveUp = true;
-            }
+            MoveDown = true;
+        }
+        else
+        {
+            MoveUp = true;
         }
     }
 }
