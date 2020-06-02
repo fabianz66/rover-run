@@ -19,11 +19,17 @@ public class Street : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float temp = (cam.transform.position.x);
+        float camX = (cam.transform.position.x);
+
+        if (camX > startpos + length)
+        {
+            startpos += length;
+        }
+        else if (camX < startpos - length)
+        {
+            startpos -= length;
+        }
 
         transform.position = new Vector3(startpos, transform.position.y, transform.position.z);
-
-        if (temp > startpos + length) startpos += length;
-        else if (temp < startpos - length) startpos -= length;
     }
 }
