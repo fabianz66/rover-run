@@ -15,6 +15,9 @@ public class MenuControl : MonoBehaviour
     [SerializeField]
     public Sprite UnmutedSprite;
 
+    [SerializeField]
+    public Text VersionText;
+
     private void Start()
     {
         //Initial UI
@@ -27,6 +30,7 @@ public class MenuControl : MonoBehaviour
             MuteUnmuteButton.image.sprite = UnmutedSprite;
         }
         Time.timeScale = 1.0f;
+        VersionText.text = Application.version;
     }
 
     public void ExitGame()
@@ -39,9 +43,16 @@ public class MenuControl : MonoBehaviour
         Application.OpenURL("https://www.facebook.com/RepuestosLandRoverImpreza");
     }
 
-    public void StartGame()
+    public void StartGameEasy()
     {
+        PlayerPrefs.SetFloat(Constants.KEY_OBSTACLES_DISTANCE, Constants.OBSTACLES_DISTANCE_EASY);
         SceneManager.LoadScene("GameScene");        
+    }
+
+    public void StartGameDifficult()
+    {
+        PlayerPrefs.SetFloat(Constants.KEY_OBSTACLES_DISTANCE, Constants.OBSTACLES_DISTANCE_DIFFICULT);
+        SceneManager.LoadScene("GameScene");
     }
 
     public void MuteUnmute()
@@ -56,5 +67,10 @@ public class MenuControl : MonoBehaviour
             AudioListener.volume = 0;
             MuteUnmuteButton.image.sprite = MutedSprite;
         }
+    }
+
+    public void OpenInfo()
+    {
+        SceneManager.LoadScene("Info");
     }
 }

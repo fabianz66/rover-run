@@ -53,7 +53,8 @@ public class ObstaclesSpawner : MonoBehaviour
     {
         playerControl = player.GetComponent<PlayerControl>();
         playerWidth = playerSpriteRenderer.bounds.size.x;
-        minDistanceBetweenCars = playerWidth * 2.195f;
+        float playerWidthScale = PlayerPrefs.GetFloat(Constants.KEY_OBSTACLES_DISTANCE, Constants.OBSTACLES_DISTANCE_DIFFICULT);
+        minDistanceBetweenCars = playerWidth * playerWidthScale;
     }
 
     private void FixedUpdate()

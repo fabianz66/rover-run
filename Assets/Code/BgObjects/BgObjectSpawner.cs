@@ -98,22 +98,21 @@ public class BgObjectSpawner : MonoBehaviour
     void CreateGroups()
     {
         int position = 0;
-        int length = 125;
+        int length = 150;
         BgObjectGroup group = null;
 
         //ALAJUELA
         group = new BgObjectGroup("ALAJUELA", position, length);
-        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "ALAJUELA", null);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
-        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela1);
+        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "ALAJUELA", null);        
+        group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela1);        
         groups.Add(group);
         position += length;
 
         //CARTAGO
         group = new BgObjectGroup("CARTAGO", position, length);
-        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "CARTAGO", null);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
+        group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "CARTAGO", null);        
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.cartago1);
+        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         groups.Add(group);
         position += length;
 
@@ -121,7 +120,6 @@ public class BgObjectSpawner : MonoBehaviour
         group = new BgObjectGroup("GUANACASTE", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "GUANACASTE", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.guanacaste1);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         groups.Add(group);
         position += length;
 
@@ -130,7 +128,6 @@ public class BgObjectSpawner : MonoBehaviour
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "HEREDIA", null);
         group.AddBgObject(BgObject.TYPE.INCREASE_SPEED, null, null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.heredia1);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         groups.Add(group);
         position += length;
 
@@ -138,7 +135,6 @@ public class BgObjectSpawner : MonoBehaviour
         group = new BgObjectGroup("LIMON", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "LIMON", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.limon1);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         groups.Add(group);
         position += length;
 
@@ -146,7 +142,6 @@ public class BgObjectSpawner : MonoBehaviour
         group = new BgObjectGroup("PUNTARENAS", position, length);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "PUNTARENAS", null);
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.puntarenas1);
-        group.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);
         groups.Add(group);
         position += length;
 
@@ -160,8 +155,7 @@ public class BgObjectSpawner : MonoBehaviour
 
         //IMPREZA
         imprezaBgGroup = new BgObjectGroup("IMPREZA LTDA", position, length);
-        imprezaBgGroup.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "IMPREZA", null);
-        imprezaBgGroup.AddBgObject(BgObject.TYPE.BILLBOARD, "Encuentra Ing. o Arq. en www.construyo.cr", null);        
+        imprezaBgGroup.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "IMPREZA", null);        
         imprezaBgGroup.AddBgObject(BgObject.TYPE.IMAGE, null, this.impreza1);
         imprezaBgGroup.AddBgObject(BgObject.TYPE.FINISH_LINE, null, null);
         groups.Add(imprezaBgGroup);
