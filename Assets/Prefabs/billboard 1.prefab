@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1277741938966354361}
   - component: {fileID: 6315654069318309134}
   - component: {fileID: 7677434925157945172}
+  - component: {fileID: 8876377928616964370}
   m_Layer: 0
   m_Name: billboard 1
   m_TagString: Untagged
@@ -109,6 +110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRendered: {fileID: 1277741938966354361}
+--- !u!114 &8876377928616964370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1277741938966354359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601a117ed712e4d908eefe572b0aacf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1277741939640035039
 GameObject:
   m_ObjectHideFlags: 0

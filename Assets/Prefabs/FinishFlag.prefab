@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7662129925141450179}
   - component: {fileID: 7662129925141450177}
   - component: {fileID: 7662129925141450176}
+  - component: {fileID: 9176715632679606647}
   m_Layer: 0
   m_Name: FinishFlag
   m_TagString: Untagged
@@ -119,5 +120,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ff3d767ba03f4772b79cd6b752c36ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9176715632679606647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7662129925141450189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601a117ed712e4d908eefe572b0aacf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
