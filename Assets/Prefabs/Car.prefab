@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 6823311276920408630}
   - component: {fileID: -5251869238406709063}
   - component: {fileID: 7047527163893858102}
+  - component: {fileID: 1259065577312768647}
   m_Layer: 11
   m_Name: Car
   m_TagString: Untagged
@@ -386,3 +387,15 @@ MonoBehaviour:
   LeftTireSprite: {fileID: 6823311276852114194}
   RightTireSprite: {fileID: 6823311275009236410}
   CarSprite: {fileID: 6823311276920408618}
+--- !u!114 &1259065577312768647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6823311276920408620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 601a117ed712e4d908eefe572b0aacf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
