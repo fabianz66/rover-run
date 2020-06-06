@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -29,7 +27,11 @@ public class MenuControl : MonoBehaviour
         {
             MuteUnmuteButton.image.sprite = UnmutedSprite;
         }
+
+        //Resume time
         Time.timeScale = 1.0f;
+
+        //Show app version
         VersionText.text = Application.version;
     }
 
@@ -53,6 +55,11 @@ public class MenuControl : MonoBehaviour
     {
         PlayerPrefs.SetFloat(Constants.KEY_OBSTACLES_DISTANCE, Constants.OBSTACLES_DISTANCE_DIFFICULT);
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void PlayerSelect()
+    {
+        SceneManager.LoadScene("PlayerSelect");
     }
 
     public void MuteUnmute()
