@@ -12,6 +12,7 @@ public class PlayerSelectOption : MonoBehaviour
     public Image ImgIsSelected;
     public Text StarsCostTxt;
     public PlayerSelectControl PlayerSelectController;
+    public Text StarsCountTxt;
 
     void Start()
     {
@@ -62,6 +63,7 @@ public class PlayerSelectOption : MonoBehaviour
         if (stars >= StarsCost) {
             PlayerPrefs.SetInt(Constants.KEY_STARS_COUNT, stars - StarsCost);
             PlayerPrefs.SetInt(SelectedPlayerId, Constants.PLAYER_UNLOCKED);
+            StarsCountTxt.text = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0).ToString();
             PlayerSelectController.RefreshUI();
         }
     }

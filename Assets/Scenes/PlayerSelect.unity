@@ -161,6 +161,7 @@ MonoBehaviour:
   ImgIsSelected: {fileID: 1367742602}
   StarsCostTxt: {fileID: 1553394786}
   PlayerSelectController: {fileID: 1776644346}
+  StarsCountTxt: {fileID: 845177080}
 --- !u!114 &137924690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1214,7 +1215,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1869964686}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -2115,17 +2116,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 845177078}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1869964686}
-  m_RootOrder: 2
+  m_Father: {fileID: 1896693291}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -83.79999, y: -13.450012}
-  m_SizeDelta: {x: 158.2, y: 58.1}
+  m_AnchoredPosition: {x: -73.80002, y: -3.450016}
+  m_SizeDelta: {x: 120.4, y: 61.55}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &845177080
 MonoBehaviour:
@@ -2318,7 +2319,7 @@ RectTransform:
   - {fileID: 1490578741}
   - {fileID: 207331158}
   m_Father: {fileID: 1869964686}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2418,6 +2419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowAdButton: {fileID: 889798250}
   PlayerSelectScreen: {fileID: 1776644346}
+  StarsCountTxt: {fileID: 845177080}
 --- !u!1 &899085211
 GameObject:
   m_ObjectHideFlags: 0
@@ -2531,7 +2533,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1869964686}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -2772,6 +2774,7 @@ MonoBehaviour:
   ImgIsSelected: {fileID: 552636581}
   StarsCostTxt: {fileID: 1011131352}
   PlayerSelectController: {fileID: 1776644346}
+  StarsCountTxt: {fileID: 845177080}
 --- !u!114 &978975389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3097,6 +3100,7 @@ MonoBehaviour:
   ImgIsSelected: {fileID: 1904729260}
   StarsCostTxt: {fileID: 1813792293}
   PlayerSelectController: {fileID: 1776644346}
+  StarsCountTxt: {fileID: 845177080}
 --- !u!114 &1041857043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4368,6 +4372,7 @@ MonoBehaviour:
   ImgIsSelected: {fileID: 288802568}
   StarsCostTxt: {fileID: 1981043032}
   PlayerSelectController: {fileID: 1776644346}
+  StarsCountTxt: {fileID: 845177080}
 --- !u!114 &1502689519
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5033,7 +5038,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 967471b471d484a05b78c24b69044aa8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StarsCountText: {fileID: 845177080}
 --- !u!4 &1776644347
 Transform:
   m_ObjectHideFlags: 0
@@ -5236,7 +5240,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1869964686}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5456,7 +5460,6 @@ RectTransform:
   m_Children:
   - {fileID: 594945305}
   - {fileID: 1896693291}
-  - {fileID: 845177079}
   - {fileID: 889798249}
   - {fileID: 936854874}
   - {fileID: 541050788}
@@ -5497,7 +5500,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 845177079}
   m_Father: {fileID: 1869964686}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6156,6 +6160,7 @@ MonoBehaviour:
   ImgIsSelected: {fileID: 937988692}
   StarsCostTxt: {fileID: 523839912}
   PlayerSelectController: {fileID: 1776644346}
+  StarsCountTxt: {fileID: 845177080}
 --- !u!114 &2086540489
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,6 +29,6 @@ public static class Constants
 #endif
     public const string BANNER_PLACEMENT_ID = "rover_run_banner";
     public const string REWARDED_VIDEO_PLACEMENT_ID = "rewardedVideo";
-    public const bool ADS_TEST_MODE = true;
+    public const bool ADS_TEST_MODE = false;
 
 }

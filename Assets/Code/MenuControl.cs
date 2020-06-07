@@ -64,7 +64,7 @@ public class MenuControl : MonoBehaviour
 
     public void PlayerSelect()
     {
-        SceneManager.LoadScene("PlayerSelect");
+        SceneManager.LoadScene("PlayerSelect", LoadSceneMode.Single);
     }
 
     public void MuteUnmute()

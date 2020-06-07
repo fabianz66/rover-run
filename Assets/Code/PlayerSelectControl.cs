@@ -7,15 +7,8 @@ using UnityEngine.SceneManagement;
 public class PlayerSelectControl : MonoBehaviour
 {
     private List<PlayerSelectOption> AllPlayerOptions;
-    public Text StarsCountText;
-
-    public void Start()
-    {
-        StarsCountText.text = "" + PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0);
-    }
 
     public void RefreshUI() {
-        StarsCountText.text = "" + PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0);
         foreach (PlayerSelectOption obj in AllPlayerOptions) {
             obj.RefreshUI();
         }

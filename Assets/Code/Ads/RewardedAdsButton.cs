@@ -9,6 +9,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener
 {
     public Button ShowAdButton;
     public PlayerSelectControl PlayerSelectScreen;
+    public Text StarsCountTxt;
 
     void Start()
     {
@@ -21,6 +22,13 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener
         // Initialize the Ads listener and service:
         Advertisement.AddListener(this);
         Advertisement.Initialize(Constants.ADS_GAME_ID, Constants.ADS_TEST_MODE);
+        StarsCountTxt.text = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0).ToString();
+    }
+
+    void OnDestroy()
+    {
+        Debug.Log("onDestroy");
+        Advertisement.RemoveListener(this);
     }
 
     // Implement a function for showing a rewarded video ad:
@@ -46,7 +54,10 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener
         {
             int starsCount = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0);
             PlayerPrefs.SetInt(Constants.KEY_STARS_COUNT, starsCount + Constants.STARS_PER_AD);
-            PlayerSelectScreen.RefreshUI();
+            if(StarsCountTxt != null)
+            {
+                StarsCountTxt.text = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0).ToString();
+            }            
         }
         else if (showResult == ShowResult.Skipped)
         {

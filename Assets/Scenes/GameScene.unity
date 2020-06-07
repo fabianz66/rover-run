@@ -2707,6 +2707,7 @@ GameObject:
   - component: {fileID: 1378545904}
   - component: {fileID: 1378545907}
   - component: {fileID: 1378545908}
+  - component: {fileID: 1378545909}
   m_Layer: 14
   m_Name: Player
   m_TagString: Player
@@ -2988,6 +2989,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _engineStartClip: {fileID: 8300000, guid: 20167756a575a42d0be243832976c922, type: 3}
   _engineLoopClip: {fileID: 8300000, guid: 6fe4fd926e5eb403d8ee24845e70ca80, type: 3}
+--- !u!114 &1378545909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1378545899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4235dd1a1c4a45ffae837c76933a72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Perico: {fileID: 21300000, guid: eb930e794241d442487358b60cdded91, type: 3}
+  LrPickupYellow: {fileID: 21300000, guid: 09655278b32c24983a3924855b0ded2c, type: 3}
+  LrPickupBlue: {fileID: 21300000, guid: b7db3eff9baeb43b289bdfd9a5ff5173, type: 3}
+  LrPickupRedStripped: {fileID: 21300000, guid: acbca084f978a4373acf949193ebf1ae,
+    type: 3}
+  LrPickupBlack: {fileID: 21300000, guid: 9b04132805ebe4cf68e71c86b75be5fa, type: 3}
+  PlayerSpriteRenderer: {fileID: 1378545901}
 --- !u!1 &1399464790
 GameObject:
   m_ObjectHideFlags: 0
