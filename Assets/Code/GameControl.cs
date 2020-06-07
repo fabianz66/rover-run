@@ -33,6 +33,8 @@ public class GameControl : MonoBehaviour
     [SerializeField]
     public AudioClip GameCompletedMusic;
 
+    public Image StarsWon;
+
     //Player information
     [SerializeField]
     public GameObject player;
@@ -46,6 +48,7 @@ public class GameControl : MonoBehaviour
     {
         //Initial UI
         SetTitle(null);
+        StarsWon.gameObject.SetActive(false);
         if (AudioListener.volume == 0) {
             MuteUnmuteButton.image.sprite = MutedSprite;
         } else {
@@ -116,11 +119,17 @@ public class GameControl : MonoBehaviour
 
     public void GameCompleted()
     {
+        if (gameOver) return;
+
+        Debug.Log("GAME COMPLETED");
         SetTitle("¡LLEGASTE!");
         gameOver = true;
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().clip = GameCompletedMusic;
         Camera.main.GetComponent<AudioSource>().Play();
+        StarsWon.gameObject.SetActive(true);
+        int stars = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT);
+        PlayerPrefs.SetInt(Constants.KEY_STARS_COUNT, stars + 50);
         Time.timeScale = 0.0f;
     }
 
@@ -143,5 +152,18 @@ public class GameControl : MonoBehaviour
             TitleText.enabled = false;
             TitleBg.SetActive(false);
         }        
+    }
+
+    void Update()
+    {
+        // Make sure user is on Android platform
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            // Check if Back was pressed this frame
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                MainMenu();
+            }
+        }
     }
 }

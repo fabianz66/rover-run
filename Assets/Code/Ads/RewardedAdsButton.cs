@@ -7,17 +7,16 @@ using UnityEngine.Advertisements;
 [RequireComponent(typeof(Button))]
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener
 {
-    Button myButton;
+    public Button ShowAdButton;
+    public PlayerSelectControl PlayerSelectScreen;
 
     void Start()
     {
-        myButton = GetComponent<Button>();
-
         // Set interactivity to be dependent on the Placement’s status:
-        myButton.interactable = Advertisement.IsReady(Constants.REWARDED_VIDEO_PLACEMENT_ID);
+        ShowAdButton.interactable = Advertisement.IsReady(Constants.REWARDED_VIDEO_PLACEMENT_ID);
 
         // Map the ShowRewardedVideo function to the button’s click listener:
-        if (myButton) myButton.onClick.AddListener(ShowRewardedVideo);
+        if (ShowAdButton) ShowAdButton.onClick.AddListener(ShowRewardedVideo);
 
         // Initialize the Ads listener and service:
         Advertisement.AddListener(this);
@@ -36,7 +35,7 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener
         // If the ready Placement is rewarded, activate the button: 
         if (placementId == Constants.REWARDED_VIDEO_PLACEMENT_ID)
         {
-            myButton.interactable = true;
+            ShowAdButton.interactable = true;
         }
     }
 
@@ -45,8 +44,9 @@ public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener
         // Define conditional logic for each ad completion status:
         if (showResult == ShowResult.Finished)
         {
-            // Reward the user for watching the ad to completion.
-            Debug.Log("OnUnityAdsDidFinish:FINISHED");
+            int starsCount = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0);
+            PlayerPrefs.SetInt(Constants.KEY_STARS_COUNT, starsCount + Constants.STARS_PER_AD);
+            PlayerSelectScreen.RefreshUI();
         }
         else if (showResult == ShowResult.Skipped)
         {

@@ -45,6 +45,11 @@ public class MenuControl : MonoBehaviour
         Application.OpenURL("https://www.facebook.com/RepuestosLandRoverImpreza");
     }
 
+    public void OpenZamoraEngineer()
+    {
+        Application.OpenURL("https://www.zamora.engineer");
+    }
+
     public void StartGameEasy()
     {
         PlayerPrefs.SetFloat(Constants.KEY_OBSTACLES_DISTANCE, Constants.OBSTACLES_DISTANCE_EASY);
@@ -79,5 +84,18 @@ public class MenuControl : MonoBehaviour
     public void OpenInfo()
     {
         SceneManager.LoadScene("Info");
+    }
+
+    void Update()
+    {
+        // Make sure user is on Android platform
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            // Check if Back was pressed this frame
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                ExitGame();
+            }
+        }
     }
 }

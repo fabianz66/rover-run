@@ -6,6 +6,10 @@ public static class Constants
     public const float OBSTACLES_DISTANCE_EASY = 2.5f;
     public const float OBSTACLES_DISTANCE_DIFFICULT = 2.195f;
 
+    //STARS
+    public const string KEY_STARS_COUNT = "STARS_COUNT";
+    public const int STARS_PER_AD = 100;
+
     //PLAYER SELECT PREFERENCES
     public const string KEY_SELECTED_PLAYER = "SELECTED_PLAYER";
     public const string PLAYER_PERICO = "PERICO";
