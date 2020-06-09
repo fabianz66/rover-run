@@ -913,7 +913,7 @@ MonoBehaviour:
   heredia1: {fileID: 21300000, guid: 814325bfbf938446cb43fa5d829833af, type: 3}
   puntarenas1: {fileID: 21300000, guid: e6a996650a5c34e56aad057a90a28b7b, type: 3}
   guanacaste1: {fileID: 21300000, guid: 39072b757a3ba4b2c908c3bd7cd29550, type: 3}
-  limon1: {fileID: 21300000, guid: e6a996650a5c34e56aad057a90a28b7b, type: 3}
+  limon1: {fileID: 21300000, guid: bac0e286b304a4d2c820c952aa2c5bc4, type: 3}
   cartago1: {fileID: 21300000, guid: 780324e31baea43068fb898a0a137f04, type: 3}
   adConstruYO1: {fileID: 0}
 --- !u!114 &178507847
@@ -1214,8 +1214,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 41.054985, y: 0}
-  m_SizeDelta: {x: 47.11, y: 40.58}
+  m_AnchoredPosition: {x: 41.74, y: 0.0000016689}
+  m_SizeDelta: {x: 48.47, y: 44.67}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &485238730
 MonoBehaviour:

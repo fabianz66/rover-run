@@ -12,12 +12,6 @@ public static class Constants
 
     //PLAYER SELECT PREFERENCES
     public const string KEY_SELECTED_PLAYER = "SELECTED_PLAYER";
-    public const string PLAYER_PERICO = "PERICO";
-    public const string PLAYER_LR_PICKUP_YELLOW = "LR_PICKUP_YELLOW";
-    public const string PLAYER_LR_PICKUP_BLUE = "LR_PICKUP_BLUE";
-    public const string PLAYER_LR_PICKUP_RED_STRIPES = "LR_PICKUP_RED_STRIPES";
-    public const string PLAYER_LR_PICKUP_BLACK = "LR_PICKUP_BLACK";
-    public const string PLAYER_DEFAULT = PLAYER_PERICO;
     public const int PLAYER_LOCKED = 0;
     public const int PLAYER_UNLOCKED = 1;   
 

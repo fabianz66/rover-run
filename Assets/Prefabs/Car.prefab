@@ -380,6 +380,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9b04132805ebe4cf68e71c86b75be5fa, type: 3}
   - {fileID: 21300000, guid: b7db3eff9baeb43b289bdfd9a5ff5173, type: 3}
   - {fileID: 21300000, guid: 09655278b32c24983a3924855b0ded2c, type: 3}
+  - {fileID: 21300000, guid: 484ddb313929d49b8b3c78f3ae35ae47, type: 3}
+  - {fileID: 21300000, guid: 8c1710b5802dc469eb2caed8b1211609, type: 3}
+  - {fileID: 21300000, guid: fdf578a0b4dc34b4aa60d2e048234bdb, type: 3}
+  - {fileID: 21300000, guid: 7162afdc05c7d43e1bfe2e4cf3007802, type: 3}
   TireSprites:
   - {fileID: 21300000, guid: 5cf88a61bab414312877e7df1ada62db, type: 3}
   - {fileID: 21300000, guid: 2ce4179a60a9a4cb5a59f5823b8408fc, type: 3}

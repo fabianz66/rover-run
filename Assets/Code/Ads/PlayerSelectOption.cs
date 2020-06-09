@@ -10,30 +10,27 @@ public class PlayerSelectOption : MonoBehaviour
     public Button BtnExchange;
     public Button BtnSelect;
     public Image ImgIsSelected;
+    public Image ImgCarBody;
     public Text StarsCostTxt;
-    public PlayerSelectControl PlayerSelectController;
-    public Text StarsCountTxt;
+    public SelectCarOptionsFactory SelectCarScreen;
 
     void Start()
     {
-        //We want El perico always unlocked
-        PlayerPrefs.SetInt(Constants.PLAYER_PERICO, Constants.PLAYER_UNLOCKED);
-      
         // Map the ShowRewardedVideo function to the button’s click listener:
         BtnExchange.onClick.AddListener(ExchangeStars);
         BtnSelect.onClick.AddListener(SetAsCurrentPlayer);
 
         //Refresh UI
         RefreshUI();
-
-        //Registers itself
-        PlayerSelectController.RegisterOption(this);
     }
 
     public void RefreshUI()
     {
         //If locked
         bool isLocked = PlayerPrefs.GetInt(SelectedPlayerId, Constants.PLAYER_LOCKED) == Constants.PLAYER_LOCKED;
+        if (SelectedPlayerId.Equals(SelectCarOptionsFactory.DEFAULT_PLAYER_SPRITE)) {
+            isLocked = false;
+        }
         BtnExchange.gameObject.SetActive(isLocked);        
         StarsCostTxt.gameObject.SetActive(isLocked);
         StarsCostTxt.text = "" + StarsCost;
@@ -46,7 +43,7 @@ public class PlayerSelectOption : MonoBehaviour
         }
 
         //Player unlocked        
-        bool isSelected = PlayerPrefs.GetString(Constants.KEY_SELECTED_PLAYER, Constants.PLAYER_DEFAULT) == SelectedPlayerId;
+        bool isSelected = PlayerPrefs.GetString(Constants.KEY_SELECTED_PLAYER, SelectCarOptionsFactory.DEFAULT_PLAYER_SPRITE) == SelectedPlayerId;
         BtnSelect.gameObject.SetActive(!isSelected);
         ImgIsSelected.gameObject.SetActive(isSelected);
     }
@@ -54,7 +51,7 @@ public class PlayerSelectOption : MonoBehaviour
     void SetAsCurrentPlayer()
     {
         PlayerPrefs.SetString(Constants.KEY_SELECTED_PLAYER, SelectedPlayerId);
-        PlayerSelectController.RefreshUI();
+        SelectCarScreen.RefreshUI();
     }
 
     void ExchangeStars()
@@ -63,8 +60,7 @@ public class PlayerSelectOption : MonoBehaviour
         if (stars >= StarsCost) {
             PlayerPrefs.SetInt(Constants.KEY_STARS_COUNT, stars - StarsCost);
             PlayerPrefs.SetInt(SelectedPlayerId, Constants.PLAYER_UNLOCKED);
-            StarsCountTxt.text = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT, 0).ToString();
-            PlayerSelectController.RefreshUI();
+            SelectCarScreen.RefreshUI();
         }
     }
 }
