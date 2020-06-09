@@ -103,7 +103,6 @@ public class BgObjectSpawner : MonoBehaviour
 
         //ALAJUELA
         group = new BgObjectGroup("ALAJUELA", position, length);
-        group.AddBgObject(BgObject.TYPE.FINISH_LINE, "ALAJUELA", null);
         group.AddBgObject(BgObject.TYPE.ROAD_SIGN_GREEN, "ALAJUELA", null);        
         group.AddBgObject(BgObject.TYPE.IMAGE, null, this.alajuela1);        
         groups.Add(group);
