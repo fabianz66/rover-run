@@ -8,7 +8,6 @@ using UnityEngine.Advertisements;
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener
 {
     public Button ShowAdButton;
-    public PlayerSelectControl PlayerSelectScreen;
     public Text StarsCountTxt;
 
     void Start()

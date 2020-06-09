@@ -34,6 +34,7 @@ public class GameControl : MonoBehaviour
     public AudioClip GameCompletedMusic;
 
     public Image StarsWon;
+    public Text StarsCountTxt;
 
     //Player information
     [SerializeField]
@@ -130,6 +131,7 @@ public class GameControl : MonoBehaviour
         StarsWon.gameObject.SetActive(true);
         int stars = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT);
         PlayerPrefs.SetInt(Constants.KEY_STARS_COUNT, stars + 50);
+        StarsCountTxt.text = PlayerPrefs.GetInt(Constants.KEY_STARS_COUNT).ToString();
         Time.timeScale = 0.0f;
     }
 
