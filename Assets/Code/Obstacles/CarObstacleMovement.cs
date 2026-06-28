@@ -16,6 +16,6 @@ public class CarObstacleMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _rigidBody.velocity = Vector3.right * _finalMaxVelocity * Time.timeScale;
+        _rigidBody.linearVelocity = Vector3.right * _finalMaxVelocity * Time.timeScale;
     }
 }

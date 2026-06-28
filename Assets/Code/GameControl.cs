@@ -122,9 +122,9 @@ public class GameControl : MonoBehaviour
     {
         if (gameOver) return;
 
-        Debug.Log("GAME COMPLETED");
-        SetTitle("¡LLEGASTE!");
         gameOver = true;
+        player.GetComponent<PlayerHealth>().FullHeal();
+        SetTitle("¡IMPREZA TE REPARA!\n¡LLEGASTE!");
         playerAudio.Stop();
         Camera.main.GetComponent<AudioSource>().clip = GameCompletedMusic;
         Camera.main.GetComponent<AudioSource>().Play();

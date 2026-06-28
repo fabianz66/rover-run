@@ -22,10 +22,13 @@ public class PlayerSpeed : MonoBehaviour
     //Initial delay to start moving according to the music
     private float initialDelayS = 2f;
 
+    private PlayerHealth playerHealth;
+
     void Start()
     {
         this.GetComponent<Animator>().enabled = false;
-        Invoke("StartMoving", initialDelayS);//Initial delay to start moving and animating
+        Invoke("StartMoving", initialDelayS);
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     void FixedUpdate()
@@ -34,7 +37,7 @@ public class PlayerSpeed : MonoBehaviour
         if (playerMoving == false) return;
 
         // Add force to player if he hasn't reached _currentMaxVelocity
-        if (playerRigidBody.velocity.x < maxVelocity)
+        if (playerRigidBody.linearVelocity.x < maxVelocity)
         {
             playerRigidBody.AddForce(Vector2.right * acceleration);
         }
@@ -49,9 +52,20 @@ public class PlayerSpeed : MonoBehaviour
     {
         if (playerMoving == false) return;
 
-        if (collision.gameObject.name == "Car(Clone)" || Mathf.Abs(playerRigidBody.transform.rotation.z) > 0.9f)
+        // Car rolled over — totaled, no health can save it
+        if (Mathf.Abs(playerRigidBody.transform.rotation.z) > 0.9f)
         {
             gameController.GetComponent<GameControl>().GameOver();
+            return;
+        }
+
+        if (playerHealth == null) return;
+
+        switch (collision.gameObject.name)
+        {
+            case "Car(Clone)":  playerHealth.TakeDamage(40f); break;
+            case "Rock(Clone)": playerHealth.TakeDamage(25f); break;
+            case "Cone(Clone)": playerHealth.TakeDamage(10f); break;
         }
     }
 

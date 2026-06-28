@@ -49,7 +49,7 @@ public class MenuObstaclesSpawner : MonoBehaviour
     private void FixedUpdate()
     {
         //Don't do anything at the beginning
-        if (playerRigidBody.velocity.x < 1.0f) return;
+        if (playerRigidBody.linearVelocity.x < 1.0f) return;
 
         // Edge case when there is no spawned car yet
         if (latestObject == null) {
